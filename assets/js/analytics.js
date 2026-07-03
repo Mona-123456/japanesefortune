@@ -11,7 +11,7 @@
    ========================================================================== */
 
 // ▼▼ EDIT THIS ONE LINE after creating the GA4 property ▼▼
-var GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
+var GA4_MEASUREMENT_ID = "G-51J3FTG5BR";
 // ▲▲ leave as-is to keep analytics disabled ▲▲
 
 (function () {
