@@ -54,7 +54,8 @@ npm run build            # both
 |------|----------------|
 | `constants.js`   | Stems 天干, branches 地支, five elements, the 12 節 term table |
 | `astronomy.js`   | Julian Day, ΔT, and the Sun's apparent longitude (Meeus ch. 25) |
-| `solar-terms.js` | Solves for 立春 / 節 instants in JST (the real boundaries) |
+| `solar-terms.js` | Solves for 立春 / 節 instants (returns both JST-civil and absolute UT) |
+| `localtime.js`   | True-solar-time (真太陽時) correction: longitude + Equation of Time; city table |
 | `ganzhi.js`      | The four pillars, Day Master, five-element balance |
 | `index.js`       | Public entry point |
 
@@ -77,6 +78,11 @@ chart.balance.counts;       // { wood, fire, earth, metal, water }
   on the published reference (2019-01-27 = 甲子). It changes at civil midnight.
 - Month stem via **五虎遁**, hour stem via **五鼠遁**. Birth time is optional; when
   unknown, no hour pillar is produced but the Day Master is still valid.
+- **True solar time (真太陽時)** is optional: pass `place: { longitude, tzOffsetHours }`
+  (or pick a city in the UI) to correct the hour/day pillars for the birthplace's
+  longitude + Equation of Time. The 節/立春 boundaries are compared in absolute UT,
+  so foreign timezones are handled correctly. With no `place`, behaviour is
+  unchanged (JST, no correction) — fully backward compatible.
 
 ## Development
 

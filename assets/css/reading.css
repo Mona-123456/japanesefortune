@@ -19,6 +19,30 @@
 .result-head h2 { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; }
 .dm-glyph { font-family: var(--font-display); font-size: 1.4em; }
 .result-sub { color: var(--color-text-muted); font-size: var(--fs-sm); }
+.corr-note {
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  margin-top: var(--space-2);
+}
+.corr-note .corr-breakdown { color: var(--color-text-faint); }
+
+/* Birthplace field helpers (reading form) */
+.field-help {
+  color: var(--color-text-faint);
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  line-height: var(--lh-snug);
+  margin: 0;
+  max-width: none;
+}
+.other-place {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr 1fr;
+  margin-top: var(--space-2);
+}
+@media (max-width: 26rem) { .other-place { grid-template-columns: 1fr; } }
 
 /* --- pillars grid -------------------------------------------------------- */
 .pillars {

@@ -13,3 +13,4 @@
 export { computeChart } from "./ganzhi.js";
 export { risshun, solarTermInstant, monthTermBoundaries } from "./solar-terms.js";
 export { STEMS, BRANCHES, ELEMENTS, ELEMENT_LABELS } from "./constants.js";
+export { CITIES, cityById, localTimeCorrection, equationOfTimeMinutes } from "./localtime.js";

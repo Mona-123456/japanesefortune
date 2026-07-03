@@ -5,7 +5,7 @@
    balance, reading text, share, email CTA, related guides).
    ========================================================================== */
 
-import { computeChart } from "../fourpillars/index.js";
+import { computeChart, CITIES, cityById } from "../fourpillars/index.js";
 import { ELEMENTS, ELEMENT_LABELS } from "../fourpillars/constants.js";
 import { composeReading } from "./compose.js";
 
@@ -13,11 +13,19 @@ const form = document.getElementById("reading-form");
 const resultEl = document.getElementById("reading-result");
 const timeInput = document.getElementById("birthtime");
 const timeUnknown = document.getElementById("time-unknown");
+const placeSelect = document.getElementById("birthplace");
+const otherPlace = document.getElementById("other-place");
 
 /* --- small helpers -------------------------------------------------------- */
 const escapeHtml = (s) =>
   String(s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// Signed minutes → "+19 min" / "−51 min" (true minus sign).
+const fmtCorr = (m) => {
+  const r = Math.round(m);
+  return (r >= 0 ? "+" : "−") + Math.abs(r) + " min";
+};
 
 // Minimal, safe inline markdown: escape first, then allow **bold** and *italic*.
 const mdInline = (s) =>
@@ -37,6 +45,31 @@ async function loadReadings() {
 }
 
 /* --- form → chart --------------------------------------------------------- */
+// Populate the birthplace dropdown from the city table (grouped by region).
+function populatePlaces() {
+  if (!placeSelect) return;
+  const other = placeSelect.querySelector('option[value="other"]');
+  const byRegion = {};
+  for (const c of CITIES) (byRegion[c.region] ||= []).push(c);
+  for (const region of Object.keys(byRegion)) {
+    const og = document.createElement("optgroup");
+    og.label = region;
+    for (const c of byRegion[region]) {
+      const opt = document.createElement("option");
+      opt.value = c.id;
+      opt.textContent = c.name;
+      og.appendChild(opt);
+    }
+    placeSelect.insertBefore(og, other); // keep "Other…" last
+  }
+}
+populatePlaces();
+
+// Show the longitude/offset inputs only for "Other".
+placeSelect?.addEventListener("change", () => {
+  if (otherPlace) otherPlace.hidden = placeSelect.value !== "other";
+});
+
 // Disable the time field while "unknown" is checked.
 timeUnknown?.addEventListener("change", () => {
   timeInput.disabled = timeUnknown.checked;
@@ -57,7 +90,26 @@ function readForm() {
     hour = h;
     minute = Number.isFinite(m) ? m : 0;
   }
-  return { input: { year, month, day, hour, minute } };
+
+  // Optional birthplace → true-solar-time correction.
+  let place = null;
+  const pv = placeSelect?.value;
+  if (pv === "other") {
+    const lonStr = document.getElementById("longitude").value;
+    const offStr = document.getElementById("utc-offset").value;
+    const lon = parseFloat(lonStr);
+    const off = parseFloat(offStr);
+    if (Number.isFinite(lon) && Number.isFinite(off)) {
+      place = { name: "Custom", longitude: lon, tzOffsetHours: off };
+    } else if (lonStr || offStr) {
+      return { error: "For a custom birthplace, enter both longitude and UTC offset." };
+    }
+  } else if (pv) {
+    const c = cityById(pv);
+    if (c) place = { name: c.name, longitude: c.longitude, tzOffsetHours: c.tzOffsetHours };
+  }
+
+  return { input: { year, month, day, hour, minute, place } };
 }
 
 /* --- rendering ------------------------------------------------------------ */
@@ -113,6 +165,7 @@ function renderResult(chart, reading) {
       <span class="kicker">Your Four Pillars · 四柱</span>
       <h2>You are <span class="el-fg--${dm.element}">${cap(dm.polarity)} ${dmElLabel.en}</span> <span class="dm-glyph el-fg--${dm.element}">${dm.cn}</span></h2>
       <p class="result-sub">${chart.hasTime ? "" : "Calculated without a birth time — the hour pillar is omitted, but your Day Master is unaffected. "}Born under the ${chart.monthTerm} solar term, solar year ${chart.solarYear}.</p>
+      ${chart.localCorrection ? `<p class="corr-note">Local time correction: <strong>${fmtCorr(chart.localCorrection.minutes)}</strong>${chart.localCorrection.place.name ? ` · ${escapeHtml(chart.localCorrection.place.name)}` : ""} <span class="corr-breakdown">(longitude ${fmtCorr(chart.localCorrection.longitudeMinutes)}, equation of time ${fmtCorr(chart.localCorrection.eotMinutes)})</span></p>` : ""}
     </div>
 
     <div class="pillars" role="group" aria-label="Four pillars">

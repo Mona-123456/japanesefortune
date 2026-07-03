@@ -2,17 +2,23 @@
    Ganzhi engine — the four pillars (年柱・月柱・日柱・時柱).
    --------------------------------------------------------------------------
    Conventions (documented so results are reproducible and auditable):
-     • Birth details are interpreted in Japan Standard Time (JST, UTC+9).
+     • Birth details default to Japan Standard Time (JST, UTC+9). Pass a `place`
+       to interpret them in that birthplace's zone and apply the true-solar-time
+       (真太陽時) correction — see below.
      • Year pillar switches on the true 立春 instant (not a fixed date).
-     • Month pillar switches on the true 節 (major solar-term) instants.
-     • Day pillar changes at civil midnight (mainstream Japanese convention);
-       the 23:00–00:59 slot is the 子 hour of the current civil day.
+     • Month pillar switches on the true 節 (major solar-term) instants. Both are
+       compared in absolute UT, so they are correct for any timezone.
+     • Day + hour pillars: with no `place`, the day changes at civil midnight and
+       the hour follows the clock (backward-compatible). With a `place`, both are
+       read from the birthplace's *apparent solar time* (longitude + EoT applied),
+       i.e. the day changes at true solar midnight.
      • Month stem via 五虎遁, hour stem via 五鼠遁.
    ========================================================================== */
 
-import { STEMS, BRANCHES, ELEMENTS } from "./constants.js";
-import { julianDayNumberNoon, gregorianToJD } from "./astronomy.js";
+import { STEMS, BRANCHES, ELEMENTS, TZ_OFFSET_HOURS } from "./constants.js";
+import { julianDayNumberNoon, gregorianToJD, jdToGregorian } from "./astronomy.js";
 import { risshun, monthTermBoundaries } from "./solar-terms.js";
+import { localTimeCorrection } from "./localtime.js";
 
 const mod = (n, m) => ((n % m) + m) % m;
 
@@ -117,37 +123,61 @@ function elementBalance(pillars) {
  * @param {number} birth.day   1–31
  * @param {number|null} [birth.hour]   0–23; omit / null when the time is unknown
  * @param {number} [birth.minute=0]
- * @returns {object} chart with pillars, day master, and element balance
+ * @param {object|null} [birth.place]  birthplace for the true-solar correction;
+ *        `{ longitude (East +), tzOffsetHours, name? }`. Omit for JST / no correction.
+ * @returns {object} chart with pillars, day master, element balance, and (if a
+ *        place was given) the applied `localCorrection`.
  */
-export function computeChart({ year, month, day, hour = null, minute = 0 }) {
+export function computeChart({ year, month, day, hour = null, minute = 0, place = null }) {
   if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day)) {
     throw new TypeError("year, month, and day are required integers");
   }
   const hasTime = hour != null;
+  const effHour = hasTime ? hour : 12; // unknown time → noon (neutral for day boundary)
 
-  // JD of the birth wall-clock (JST). Term instants are in the same JST-JD space,
-  // so these are directly comparable. Unknown time → noon (neutral for the day boundary).
-  const effHour = hasTime ? hour : 12;
-  const birthJD = gregorianToJD(year, month, day, effHour, minute);
+  // The entered clock time interpreted in the birthplace's zone (default JST).
+  const tz = place ? place.tzOffsetHours : TZ_OFFSET_HOURS;
+  const clockJD = gregorianToJD(year, month, day, effHour, minute);
 
-  // --- Solar year (立春 boundary) ---
+  // --- True-solar-time correction (only when a birthplace is given) ---
+  // Day + hour pillars read from the corrected (apparent solar) local datetime.
+  let localCorrection = null;
+  let dayY = year, dayM = month, dayD = day;
+  let localHour = hasTime ? hour : null;
+  if (place) {
+    const corr = localTimeCorrection({ longitude: place.longitude, tzOffsetHours: tz, year, month, day });
+    localCorrection = {
+      minutes: corr.minutes,
+      longitudeMinutes: corr.longitudeMinutes,
+      eotMinutes: corr.eotMinutes,
+      place: { name: place.name ?? null, longitude: place.longitude, tzOffsetHours: tz },
+    };
+    const solar = jdToGregorian(clockJD + corr.minutes / 1440);
+    dayY = solar.year; dayM = solar.month; dayD = solar.day;
+    localHour = hasTime ? solar.hour : null;
+  }
+
+  // Absolute UT instant of birth — for the 節/立春 boundaries (timezone-correct).
+  const birthUT = clockJD - tz / 24;
+
+  // --- Solar year (立春 boundary), compared in UT ---
   const risshunThisYear = risshun(year);
-  const solarYear = birthJD >= risshunThisYear.jd ? year : year - 1;
+  const solarYear = birthUT >= risshunThisYear.jdUT ? year : year - 1;
   const yp = yearPillar(solarYear);
 
-  // --- Solar month (節 boundary) ---
+  // --- Solar month (節 boundary), compared in UT ---
   const boundaries = monthTermBoundaries(year);
   let monthBranch = boundaries[0].branch;
   let openingTerm = boundaries[0].term;
   for (const bnd of boundaries) {
-    if (birthJD >= bnd.jd) { monthBranch = bnd.branch; openingTerm = bnd.term; }
+    if (birthUT >= bnd.jdUT) { monthBranch = bnd.branch; openingTerm = bnd.term; }
     else break;
   }
   const mp = monthPillar(monthBranch, yp.stemIndex);
 
-  // --- Day & hour ---
-  const dp = dayPillar(year, month, day);
-  const hp = hourPillar(hasTime ? hour : null, dp.stemIndex);
+  // --- Day & hour (from the local/true-solar datetime) ---
+  const dp = dayPillar(dayY, dayM, dayD);
+  const hp = hourPillar(localHour, dp.stemIndex);
 
   const pillars = { year: yp, month: mp, day: dp, hour: hp };
   const balance = elementBalance([yp, mp, dp, hp]);
@@ -161,7 +191,7 @@ export function computeChart({ year, month, day, hour = null, minute = 0 }) {
   };
 
   return {
-    input: { year, month, day, hour: hasTime ? hour : null, minute: hasTime ? minute : null, tz: "JST" },
+    input: { year, month, day, hour: hasTime ? hour : null, minute: hasTime ? minute : null, tz: place ? tz : "JST" },
     solarYear,
     monthTerm: openingTerm,
     risshun: risshunThisYear,
@@ -169,6 +199,7 @@ export function computeChart({ year, month, day, hour = null, minute = 0 }) {
     dayMaster,
     balance,
     hasTime,
+    localCorrection,
   };
 }
 

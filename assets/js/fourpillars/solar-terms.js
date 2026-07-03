@@ -48,9 +48,11 @@ export function solarTermInstant(year, targetLon, seedMonth, seedDay) {
     if (Math.abs(diff) < 1e-7) break;
   }
 
-  const jdUT = jde - dt;                       // TT → UT
-  const jstJD = jdUT + TZ_OFFSET_HOURS / 24;   // UT → JST
-  return { jd: jstJD, ...jdToGregorian(jstJD) };
+  const jdUT = jde - dt;                       // TT → UT (absolute instant)
+  const jstJD = jdUT + TZ_OFFSET_HOURS / 24;   // UT → JST (for civil display)
+  // `jd` is the JST-civil Julian Day (used for display); `jdUT` is the absolute
+  // instant used for timezone-correct boundary comparisons.
+  return { jd: jstJD, jdUT, ...jdToGregorian(jstJD) };
 }
 
 /**
