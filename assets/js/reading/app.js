@@ -76,11 +76,37 @@ timeUnknown?.addEventListener("change", () => {
   if (timeUnknown.checked) timeInput.value = "";
 });
 
+// Auto-format the birthdate as yyyy/mm/dd while typing (digits only; slashes
+// inserted automatically). Backspace works naturally since slashes are derived
+// from the digit count.
+const birthdateInput = document.getElementById("birthdate");
+birthdateInput?.addEventListener("input", () => {
+  const d = birthdateInput.value.replace(/\D/g, "").slice(0, 8);
+  let out = d.slice(0, 4);
+  if (d.length > 4) out += "/" + d.slice(4, 6);
+  if (d.length > 6) out += "/" + d.slice(6, 8);
+  birthdateInput.value = out;
+});
+
+/** Parse "yyyy/mm/dd" (also tolerant of - or . separators) into a valid date. */
+function parseBirthdate(str) {
+  const m = String(str).trim().match(/^(\d{4})[/.\-](\d{1,2})[/.\-](\d{1,2})$/);
+  if (!m) return { error: "Enter your date of birth as yyyy/mm/dd (e.g. 1990/07/15)." };
+  const year = +m[1], month = +m[2], day = +m[3];
+  if (year < 1920 || year > 2030) return { error: "Please enter a year between 1920 and 2030." };
+  if (month < 1 || month > 12) return { error: "That month looks off — use 01–12." };
+  const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const daysInMonth = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+  if (day < 1 || day > daysInMonth) return { error: "That day isn't valid for the month." };
+  return { year, month, day };
+}
+
 function readForm() {
   const dateStr = document.getElementById("birthdate").value;
   if (!dateStr) return { error: "Please enter your date of birth." };
-  const [year, month, day] = dateStr.split("-").map(Number);
-  if (!year || !month || !day) return { error: "That date looks incomplete." };
+  const parsed = parseBirthdate(dateStr);
+  if (parsed.error) return { error: parsed.error };
+  const { year, month, day } = parsed;
 
   let hour = null;
   let minute = 0;

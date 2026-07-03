@@ -50,7 +50,13 @@
         <form id="reading-form" class="card stack" novalidate>
           <div class="stack" style="gap:var(--space-2)">
             <label for="birthdate">Date of birth <span aria-hidden="true" style="color:var(--color-accent)">*</span></label>
-            <input type="date" id="birthdate" name="birthdate" required min="1920-01-01" max="2030-12-31" />
+            <!-- Text (not type=date): the native picker's display format is locale-dependent
+                 and cannot be reliably forced. This fixes it to yyyy/mm/dd everywhere. -->
+            <input type="text" id="birthdate" name="birthdate" required
+                   inputmode="numeric" autocomplete="off" maxlength="10"
+                   placeholder="yyyy/mm/dd" pattern="\d{4}/\d{2}/\d{2}"
+                   aria-describedby="birthdate-help" />
+            <p id="birthdate-help" class="field-help">Format: yyyy/mm/dd (e.g. 1990/07/15). Year 1920–2030.</p>
           </div>
 
           <div class="stack" style="gap:var(--space-2)">
