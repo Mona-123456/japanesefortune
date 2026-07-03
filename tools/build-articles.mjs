@@ -253,6 +253,11 @@ function page(article, parsed) {
   <link rel="stylesheet" href="/assets/css/base.css" />
   <link rel="stylesheet" href="/assets/css/article.css" />
 
+  <!-- Search Console: verify the whole domain with a DNS TXT record (recommended),
+       or uncomment and paste the HTML-tag token: -->
+  <!-- <meta name="google-site-verification" content="PASTE_TOKEN_HERE" /> -->
+  <script defer src="/assets/js/analytics.js"></script>
+
   <script type="application/ld+json">
 ${jsonLd(article, parsed, url)}
   </script>
