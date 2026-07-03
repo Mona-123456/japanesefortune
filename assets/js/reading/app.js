@@ -153,9 +153,9 @@ function renderResult(chart, reading) {
     <div class="related">
       <span class="kicker">Keep reading</span>
       <div class="related-grid">
-        <a class="card related-card" href="/#articles">Who was Kazuko Hosoki? <span>The fortune teller behind Netflix&rsquo;s <em>Straight to Hell</em>.</span></a>
-        <a class="card related-card" href="/#articles">Four Pillars of Destiny <span>The 1,000-year-old system behind this reading.</span></a>
-        <a class="card related-card" href="/#articles">7 Types of Japanese Fortune Telling <span>From omikuji to Nine Star Ki.</span></a>
+        <a class="card related-card" href="/four-pillars-of-destiny-japanese-fortune-telling/">Four Pillars of Destiny <span>The 1,000-year-old system behind this reading.</span></a>
+        <a class="card related-card" href="/kazuko-hosoki-straight-to-hell-true-story/">Who was Kazuko Hosoki? <span>The fortune teller behind Netflix&rsquo;s <em>Straight to Hell</em>.</span></a>
+        <a class="card related-card" href="/types-of-japanese-fortune-telling/">7 Types of Japanese Fortune Telling <span>From omikuji to Nine Star Ki.</span></a>
       </div>
     </div>
   `;

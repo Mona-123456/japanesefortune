@@ -21,13 +21,32 @@ assets/
   css/tokens.css         Design tokens — the ONLY place colors/sizes are defined
   css/base.css           Base styles, built entirely on the tokens
   css/reading.css        Reading-result styles (pillars, element bars)
+  css/article.css        Article layout styles
+  img/og-*.png           Generated OG share images (1200×630)
   js/fourpillars/        Ganzhi calculation engine (see below)
   js/reading/            Reading tool: compose.js (synthesis) + app.js (UI wiring)
 data/readings.json       Reading templates (Mona-editable; from readings-templates.md)
-content/                 Article + template drafts
+content/                 Article + template drafts (source of truth for articles)
+tools/                   One-shot generators (see "Building" below)
+<article-slug>/          Generated article HTML (one dir per slug; committed)
 test/                    Unit tests (node --test)
 CNAME, robots.txt, sitemap.xml
 ```
+
+## Building the articles & OG images
+
+The site ships as plain static HTML — there is no build step to *serve* it. But
+the five article pages and the social images are **generated** from the drafts in
+`content/`, so re-run the generators after editing a draft:
+
+```bash
+npm run build:articles   # content/article-*.md → <slug>/index.html + sitemap.xml
+npm run build:og         # → assets/img/og-*.png   (needs the dev dependency)
+npm run build            # both
+```
+
+`build:articles` needs only Node. `build:og` needs `@napi-rs/canvas`
+(`npm install`). Generated files are committed so GitHub Pages serves them directly.
 
 ## Four Pillars engine (`assets/js/fourpillars/`)
 
@@ -79,5 +98,9 @@ python -m http.server 8080     # then open http://localhost:8080/
   outlooks) → result (pillars, five-element bars, reading, X/copy share, email
   CTA, related guides). **45 tests passing** (`node --test`), incl. a jsdom UI
   smoke pass for the full submit flow.
-- **Next (Day 3)** — article drafts flow into `content/`; OGP + structured data;
-  related-guide links repointed to real article URLs; Search Console.
+- **Day 3** — 5 articles generated to static HTML from `content/` with resolved
+  internal links; JSON-LD (Article + FAQPage, plus ItemList on the hub article);
+  per-article + generic OG images; homepage/reading related links repointed to
+  real URLs; sitemap regenerated. Rokusei Senjutsu appears only as factual /
+  critical explanation — no calculator, per spec §0.
+- **Next (Day 4)** — QA (boundary-day + mobile), Search Console + GA4, launch.

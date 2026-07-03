@@ -6,10 +6,16 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "serve": "node --version >/dev/null && python -m http.server 8080"
+    "build:articles": "node tools/build-articles.mjs",
+    "build:og": "node tools/build-og-images.mjs",
+    "build": "npm run build:articles && npm run build:og",
+    "serve": "python -m http.server 8080"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^0.1.60"
   },
   "license": "UNLICENSED"
 }
