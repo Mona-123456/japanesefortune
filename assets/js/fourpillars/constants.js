@@ -7,16 +7,16 @@
 
 /** 10 Heavenly Stems 天干. Index 0 = 甲. */
 export const STEMS = [
-  { cn: "甲", romaji: "Kō",   pinyin: "Jiǎ",  element: "wood",  yin: false },
-  { cn: "乙", romaji: "Otsu", pinyin: "Yǐ",   element: "wood",  yin: true  },
-  { cn: "丙", romaji: "Hei",  pinyin: "Bǐng", element: "fire",  yin: false },
-  { cn: "丁", romaji: "Tei",  pinyin: "Dīng", element: "fire",  yin: true  },
-  { cn: "戊", romaji: "Bo",   pinyin: "Wù",   element: "earth", yin: false },
-  { cn: "己", romaji: "Ki",   pinyin: "Jǐ",   element: "earth", yin: true  },
-  { cn: "庚", romaji: "Kō",   pinyin: "Gēng", element: "metal", yin: false },
-  { cn: "辛", romaji: "Shin", pinyin: "Xīn",  element: "metal", yin: true  },
-  { cn: "壬", romaji: "Jin",  pinyin: "Rén",  element: "water", yin: false },
-  { cn: "癸", romaji: "Ki",   pinyin: "Guǐ",  element: "water", yin: true  },
+  { cn: "甲", key: "jia",  romaji: "Kō",   pinyin: "Jiǎ",  element: "wood",  yin: false },
+  { cn: "乙", key: "yi",   romaji: "Otsu", pinyin: "Yǐ",   element: "wood",  yin: true  },
+  { cn: "丙", key: "bing", romaji: "Hei",  pinyin: "Bǐng", element: "fire",  yin: false },
+  { cn: "丁", key: "ding", romaji: "Tei",  pinyin: "Dīng", element: "fire",  yin: true  },
+  { cn: "戊", key: "wu",   romaji: "Bo",   pinyin: "Wù",   element: "earth", yin: false },
+  { cn: "己", key: "ji",   romaji: "Ki",   pinyin: "Jǐ",   element: "earth", yin: true  },
+  { cn: "庚", key: "geng", romaji: "Kō",   pinyin: "Gēng", element: "metal", yin: false },
+  { cn: "辛", key: "xin",  romaji: "Shin", pinyin: "Xīn",  element: "metal", yin: true  },
+  { cn: "壬", key: "ren",  romaji: "Jin",  pinyin: "Rén",  element: "water", yin: false },
+  { cn: "癸", key: "gui",  romaji: "Ki",   pinyin: "Guǐ",  element: "water", yin: true  },
 ];
 
 /**

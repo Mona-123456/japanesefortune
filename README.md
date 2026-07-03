@@ -20,10 +20,12 @@ reading/index.html       Free reading tool page (form skeleton; UI wired in Day 
 assets/
   css/tokens.css         Design tokens — the ONLY place colors/sizes are defined
   css/base.css           Base styles, built entirely on the tokens
+  css/reading.css        Reading-result styles (pillars, element bars)
   js/fourpillars/        Ganzhi calculation engine (see below)
-data/readings.json       Reading templates (Mona-editable; filled by クロちゃん)
-content/                 Article drafts (added Day 3)
-test/ganzhi.test.js      Unit tests (node --test)
+  js/reading/            Reading tool: compose.js (synthesis) + app.js (UI wiring)
+data/readings.json       Reading templates (Mona-editable; from readings-templates.md)
+content/                 Article + template drafts
+test/                    Unit tests (node --test)
 CNAME, robots.txt, sitemap.xml
 ```
 
@@ -71,6 +73,11 @@ python -m http.server 8080     # then open http://localhost:8080/
 
 ## Status
 
-Day 1 complete: site skeleton, design tokens, ganzhi engine, unit tests (33 passing).
-Next (Day 2): reading-tool UI + template synthesis from `data/readings.json`; articles
-land in `content/` on Day 3.
+- **Day 1** — site skeleton, design tokens, ganzhi engine, unit tests.
+- **Day 2** — reading-tool UI wired end-to-end: form → in-browser chart →
+  synthesis from `data/readings.json` (10 Day Masters × 6 balance types × 5 year
+  outlooks) → result (pillars, five-element bars, reading, X/copy share, email
+  CTA, related guides). **45 tests passing** (`node --test`), incl. a jsdom UI
+  smoke pass for the full submit flow.
+- **Next (Day 3)** — article drafts flow into `content/`; OGP + structured data;
+  related-guide links repointed to real article URLs; Search Console.

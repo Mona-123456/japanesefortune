@@ -17,6 +17,7 @@
 
   <link rel="stylesheet" href="/assets/css/tokens.css" />
   <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/reading.css" />
 </head>
 <body>
   <header class="site-header">
@@ -83,11 +84,7 @@
     </div>
   </footer>
 
-  <!-- Engine loads as an ES module; UI wiring lands in Day 2. -->
-  <script type="module">
-    import { computeChart } from "/assets/js/fourpillars/index.js";
-    // Exposed for manual QA in the console until the Day-2 UI is built.
-    window.computeChart = computeChart;
-  </script>
+  <!-- Reading tool logic (ES module): form → engine → readings.json → result. -->
+  <script type="module" src="/assets/js/reading/app.js"></script>
 </body>
 </html>

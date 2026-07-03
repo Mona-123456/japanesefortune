@@ -91,13 +91,21 @@ function elementBalance(pillars) {
     counts[p.branch.element] += 1;
   }
   let dominant = null;
-  let lacking = [];
   let max = -1;
   for (const el of ELEMENTS) {
     if (counts[el] > max) { max = counts[el]; dominant = el; }
   }
-  lacking = ELEMENTS.filter((el) => counts[el] === 0);
-  return { counts, dominant, lacking };
+  const lacking = ELEMENTS.filter((el) => counts[el] === 0);
+
+  // Reading-template selector (readings-templates.md §2 rule): use "balanced"
+  // when the spread is tight (max − min ≤ 1) OR when several elements tie for
+  // the maximum; otherwise "<element>_dominant".
+  const values = ELEMENTS.map((el) => counts[el]);
+  const min = Math.min(...values);
+  const tiedForMax = values.filter((v) => v === max).length > 1;
+  const type = (max - min <= 1 || tiedForMax) ? "balanced" : `${dominant}_dominant`;
+
+  return { counts, dominant, lacking, type };
 }
 
 /**
