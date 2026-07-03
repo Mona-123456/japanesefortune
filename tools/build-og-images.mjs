@@ -125,7 +125,7 @@ function render({ file, kicker, title, subtitle }) {
   // Footer URL
   ctx.font = "24px OGSansBold";
   ctx.fillStyle = C.faint;
-  ctx.fillText("japanesefortune.xyz", marginX, H - 54);
+  ctx.fillText("japanesefortune.com", marginX, H - 54);
 
   writeFileSync(join(OUT, file), canvas.toBuffer("image/png"));
   console.log(`✓ assets/img/${file}  (${lines.length} title line${lines.length > 1 ? "s" : ""})`);

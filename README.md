@@ -1,4 +1,4 @@
-# Japanese Fortune (`japanesefortune.xyz`)
+# Japanese Fortune (`japanesefortune.com`)
 
 Static English-language site capturing search demand around Netflix's *Straight to
 Hell* (地獄に堕ちるわよ) with a free **Four Pillars of Destiny** (四柱推命 / BaZi)

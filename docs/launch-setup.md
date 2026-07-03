@@ -17,7 +17,7 @@ loaded on all pages. It stays **off** until a real Measurement ID is set — no
 cookies or network calls before then.
 
 1. Go to **analytics.google.com** → Admin → **Create property** ("Japanese Fortune").
-2. Add a **Web data stream** for `https://japanesefortune.xyz`.
+2. Add a **Web data stream** for `https://japanesefortune.com`.
 3. Copy the **Measurement ID** (looks like `G-ABCD1234`).
 4. Edit **one line** in `assets/js/analytics.js`:
    ```js
@@ -36,7 +36,7 @@ IIFE in `analytics.js` on consent.
 Recommended: verify the **whole domain** once (covers every page + subpath).
 
 **Option A — DNS TXT (recommended, no code):**
-1. search.google.com/search-console → Add property → **Domain** → `japanesefortune.xyz`.
+1. search.google.com/search-console → Add property → **Domain** → `japanesefortune.com`.
 2. Copy the `google-site-verification=…` **TXT** value it gives you.
 3. Add it as a **TXT record** at the domain's DNS (same place as the Pages A/AAAA
    + www CNAME records). Wait for propagation, then click **Verify**.
@@ -51,7 +51,7 @@ generator template `tools/build-articles.mjs` (then `npm run build:articles`).
 Option A is cleaner — prefer it.
 
 **After verification:**
-- Submit the sitemap: **Sitemaps → add** `https://japanesefortune.xyz/sitemap.xml`.
+- Submit the sitemap: **Sitemaps → add** `https://japanesefortune.com/sitemap.xml`.
 - Use **URL Inspection → Request indexing** for article 1 (the drama entry point) to speed first impressions.
 
 ---
@@ -60,11 +60,11 @@ Option A is cleaner — prefer it.
 
 1. Repo → **Settings → Pages**.
 2. **Source: Deploy from a branch** → branch `main`, folder `/ (root)`.
-3. **Custom domain**: `japanesefortune.xyz` (the [`CNAME`](../CNAME) file is already
+3. **Custom domain**: `japanesefortune.com` (the [`CNAME`](../CNAME) file is already
    in the repo, so this should populate automatically). Enable **Enforce HTTPS**.
 
 DNS (Mona's task, likely already done for the domain):
-- Apex `japanesefortune.xyz` → GitHub Pages **A/AAAA** records
+- Apex `japanesefortune.com` → GitHub Pages **A/AAAA** records
   (`185.199.108–111.153` and the IPv6 set).
 - `www` → **CNAME** to `<user>.github.io`.
 

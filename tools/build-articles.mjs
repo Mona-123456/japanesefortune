@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = "https://japanesefortune.xyz";
+const SITE = "https://japanesefortune.com";
 const BUILD_DATE = "2026-07-03"; // datePublished / dateModified
 
 /* --- article registry: slug + internal-link key + OG image ---------------- */
@@ -312,7 +312,7 @@ ${related.map((a) => `            <a class="card related-card" href="/${a.slug}/
     <div class="container stack">
       <p class="disclaimer"><strong>For entertainment purposes only.</strong> Not medical, legal, or financial advice.</p>
       <p class="disclaimer">Independent, unofficial fan and educational project. Not affiliated with, endorsed by, or connected to Netflix, the Hosoki office, or any registered fortune-telling brand.</p>
-      <small>&copy; 2026 Japanese Fortune · japanesefortune.xyz</small>
+      <small>&copy; 2026 Japanese Fortune · japanesefortune.com</small>
     </div>
   </footer>
 </body>

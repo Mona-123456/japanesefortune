@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://japanesefortune.xyz/sitemap.xml
+Sitemap: https://japanesefortune.com/sitemap.xml

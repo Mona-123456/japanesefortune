@@ -105,7 +105,7 @@ function renderResult(chart, reading) {
   const shareText =
     `My Japanese Four Pillars Day Master is ${dm.cn} (${cap(dm.polarity)} ${cap(dm.element)}). ` +
     `Read yours free:`;
-  const shareUrl = "https://japanesefortune.xyz/reading/";
+  const shareUrl = "https://japanesefortune.com/reading/";
 
   resultEl.innerHTML = `
     <hr class="rule-mon" />
