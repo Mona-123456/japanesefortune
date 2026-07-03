@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Design Tokens — Japanese Fortune (japanesefortune.xyz)
+   --------------------------------------------------------------------------
+   Direction: 江戸眼福コレクション共通の和モチーフ。墨色ベースのダークテーマ +
+   朱 (vermilion) のアクセント。紙魚的な「少し不穏」なトーンを許容しつつ、
+   可読性を最優先する。UMAMI ブランド群の一角。
+
+   すべての値は CSS カスタムプロパティで一元管理。色・寸法を直接ハードコード
+   せず必ずこのトークンを参照すること（Mona が1箇所で調整できる構造）。
+   ========================================================================== */
+
+:root {
+  /* --- Core palette: 墨 (sumi / ink) scale ------------------------------- */
+  --c-sumi-900: #0b0a09;   /* 漆黒に近い最暗部（背景の底） */
+  --c-sumi-800: #12100e;   /* ページ背景 */
+  --c-sumi-700: #1b1815;   /* サーフェス（カード背景） */
+  --c-sumi-600: #262019;   /* 一段持ち上げたサーフェス */
+  --c-sumi-500: #3a3229;   /* ボーダー・罫 */
+  --c-sumi-400: #574c40;   /* 弱いボーダー・無効状態 */
+
+  /* --- Accent: 朱 (shu / vermilion) ------------------------------------- */
+  --c-shu-600: #8f2311;    /* 朱の陰（押下・濃色背景） */
+  --c-shu-500: #b7331a;    /* 朱・主アクセント */
+  --c-shu-400: #d4472a;    /* 朱・ホバー／強調 */
+  --c-shu-300: #e8674a;    /* 朱・明（リンク on dark） */
+
+  /* --- Secondary accent: 金 (kin / antique gold) ------------------------ */
+  --c-kin-500: #b08d4d;    /* 金・装飾罫・見出し箔 */
+  --c-kin-400: #c9a866;    /* 金・明 */
+
+  /* --- Ink text on dark -------------------------------------------------- */
+  --c-washi-100: #f4efe6;  /* 生成り（本文の最明・見出し） */
+  --c-washi-200: #e7ded0;  /* 本文 */
+  --c-washi-300: #c4b7a4;  /* 副次テキスト */
+  --c-washi-400: #948877;  /* キャプション・補助 */
+  --c-washi-500: #6b6154;  /* 最も弱いテキスト・プレースホルダ */
+
+  /* --- Five Elements 五行 (rendering accents for readings) --------------- */
+  --c-element-wood:  #4f8a5b;  /* 木 */
+  --c-element-fire:  #cf4b2c;  /* 火 */
+  --c-element-earth: #b48a4a;  /* 土 */
+  --c-element-metal: #c9c3b6;  /* 金 */
+  --c-element-water: #3f6f9a;  /* 水 */
+
+  /* --- Semantic aliases -------------------------------------------------- */
+  --color-bg:            var(--c-sumi-800);
+  --color-bg-elevated:   var(--c-sumi-700);
+  --color-bg-raised:     var(--c-sumi-600);
+  --color-border:        var(--c-sumi-500);
+  --color-border-subtle: var(--c-sumi-400);
+  --color-text:          var(--c-washi-200);
+  --color-text-strong:   var(--c-washi-100);
+  --color-text-muted:    var(--c-washi-300);
+  --color-text-faint:    var(--c-washi-400);
+  --color-accent:        var(--c-shu-500);
+  --color-accent-hover:  var(--c-shu-400);
+  --color-accent-ink:    var(--c-shu-600);
+  --color-link:          var(--c-shu-300);
+  --color-gold:          var(--c-kin-500);
+
+  /* --- Typography -------------------------------------------------------- */
+  /* 見出しは明朝系（和の格）、本文はセリフで可読性、UI はサンセリフ。
+     Web フォントは Phase 2。まずはシステムフォントで確実に表示する。 */
+  --font-display: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho",
+                  "Noto Serif JP", Georgia, "Times New Roman", serif;
+  --font-serif:   Georgia, "Iowan Old Style", "Palatino Linotype",
+                  "Noto Serif JP", "Yu Mincho", serif;
+  --font-sans:    system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
+                  "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+
+  /* Modular type scale (1.250 major third), base 18px */
+  --fs-base: 1.125rem;   /* 18px */
+  --fs-sm:   0.889rem;   /* 14px */
+  --fs-xs:   0.79rem;    /* 12.6px */
+  --fs-md:   1.125rem;
+  --fs-lg:   1.406rem;
+  --fs-xl:   1.757rem;
+  --fs-2xl:  2.197rem;
+  --fs-3xl:  2.746rem;
+  --fs-4xl:  3.433rem;
+
+  --lh-tight: 1.2;
+  --lh-snug:  1.4;
+  --lh-base:  1.7;    /* 本文（英語長文の可読性重視） */
+
+  --tracking-wide: 0.06em;   /* 見出し・小さいラベル */
+  --tracking-wider: 0.14em;  /* オーバーライン・和風ラベル */
+
+  /* --- Spacing scale (8px base) ----------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* --- Layout ------------------------------------------------------------ */
+  --measure: 42rem;         /* 本文の最適行長 */
+  --container: 72rem;       /* 最大コンテナ幅 */
+  --container-narrow: 46rem;
+
+  /* --- Radius / border --------------------------------------------------- */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --border-hairline: 1px solid var(--color-border);
+
+  /* --- Elevation --------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.55);
+
+  /* --- Motion ------------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+
+  /* --- Z-index ----------------------------------------------------------- */
+  --z-header: 100;
+  --z-overlay: 200;
+}
+
+/* Light theme is out of scope for Phase 1 (dark-only brand). The tokens are
+   structured so a future :root[data-theme="light"] block can override the
+   semantic aliases without touching component CSS. */

@@ -1,0 +1,12 @@
+{
+  "_comment": "鑑定文テンプレート。クロちゃんが readings-templates.md で納品した原稿をここに転記する（Monaが直接編集可）。Day 2 に合成ロジックを実装。六星占術のデータは絶対に含めない（spec §0/§6）。",
+  "_schema": {
+    "dayMaster": "10 stems (甲..癸) → { title, en, body[] }",
+    "balance": "5 balance types (wood/fire/earth/metal/water dominant) → paragraph",
+    "yearOutlook": "2026 (丙午) paragraph, appended to every reading"
+  },
+  "disclaimer": "For entertainment purposes only. Not medical, legal, or financial advice.",
+  "dayMaster": {},
+  "balance": {},
+  "yearOutlook": {}
+}

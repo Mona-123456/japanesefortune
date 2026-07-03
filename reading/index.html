@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Four Pillars Reading — Japanese Fortune</title>
+  <meta name="description" content="Enter your birth date for a free Four Pillars of Destiny (BaZi) reading: your Day Master, five-element balance, and 2026 outlook. Calculated in your browser." />
+  <link rel="canonical" href="https://japanesefortune.xyz/reading/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Japanese Fortune" />
+  <meta property="og:title" content="Free Four Pillars Reading — Japanese Fortune" />
+  <meta property="og:description" content="Your Day Master, five-element balance, and 2026 outlook — a free Four Pillars (BaZi) reading." />
+  <meta property="og:url" content="https://japanesefortune.xyz/reading/" />
+  <meta property="og:image" content="https://japanesefortune.xyz/assets/img/og-reading.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="/"><span class="brand__mark">☰</span> Japanese&nbsp;Fortune</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/reading/">Free Reading</a>
+        <a href="/#articles">Guides</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container container--narrow stack">
+        <span class="kicker">Four Pillars of Destiny &middot; 四柱推命</span>
+        <h1>Your free reading</h1>
+        <p style="color:var(--color-text-muted)">
+          Enter your birth details below. Everything is calculated privately in your browser &mdash;
+          nothing is sent to a server. The engine uses the traditional <em>risshun</em> (立春) solar-term
+          boundary, not a fixed calendar date.
+        </p>
+
+        <!-- Day 2 wires this form to /assets/js/fourpillars + the readings templates. -->
+        <form id="reading-form" class="card stack" novalidate>
+          <div class="stack" style="gap:var(--space-2)">
+            <label for="birthdate">Date of birth <span aria-hidden="true" style="color:var(--color-accent)">*</span></label>
+            <input type="date" id="birthdate" name="birthdate" required min="1920-01-01" max="2030-12-31" />
+          </div>
+
+          <div class="stack" style="gap:var(--space-2)">
+            <label for="birthtime">Time of birth (optional)</label>
+            <input type="time" id="birthtime" name="birthtime" />
+            <label style="display:flex;gap:var(--space-2);align-items:center">
+              <input type="checkbox" id="time-unknown" name="time-unknown" style="width:auto" />
+              I don&rsquo;t know my birth time
+            </label>
+          </div>
+
+          <div class="stack" style="gap:var(--space-2)">
+            <label for="gender">Gender (optional)</label>
+            <select id="gender" name="gender">
+              <option value="">Prefer not to say</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn">Reveal my Four Pillars</button>
+        </form>
+
+        <!-- Result renders here (Day 2). -->
+        <section id="reading-result" hidden aria-live="polite"></section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container stack">
+      <p class="disclaimer">
+        <strong>For entertainment purposes only.</strong> Not medical, legal, or financial advice.
+      </p>
+      <small>&copy; 2026 Japanese Fortune &middot; japanesefortune.xyz</small>
+    </div>
+  </footer>
+
+  <!-- Engine loads as an ES module; UI wiring lands in Day 2. -->
+  <script type="module">
+    import { computeChart } from "/assets/js/fourpillars/index.js";
+    // Exposed for manual QA in the console until the Day-2 UI is built.
+    window.computeChart = computeChart;
+  </script>
+</body>
+</html>

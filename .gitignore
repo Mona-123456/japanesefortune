@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+
+# Internal strategy / legal spec — keep local, do not publish
+japanese-fortune-mvp-spec.md

@@ -1,0 +1,124 @@
+# readings-templates.md — Four Pillars Reading テンプレート原稿 v1.0
+
+<!--
+For クロコ:
+- これを data/readings.json に変換して合成ロジックに載せる
+- 合成順: [dayMaster] + [elementBalance] + [yearFortune] + [closing共通文]
+- dayMaster: 日主の十干で選択 (10種)
+- elementBalance: 五行カウント最多の行で選択 (5種)。最多が同数タイの場合と、全行が均等(最大-最小≦1)の場合は "balanced" を使用 (6種目、予備)
+- yearFortune: 日主の五行で選択 (5種)。2026年 = 丙午 (Yang Fire Horse) 前提で執筆済み。毎年この5本だけ差し替えれば運用できる設計
+- プレースホルダ: {name} はユーザー入力名(任意)。未入力時は "you" に置換
+- 文体規則: 断定禁止。"is said to" / "traditionally associated with" / "tends to" のみ。医療・投資・法律への言及禁止
+-->
+
+---
+
+## SECTION 1: Day Master (日主) — 10 patterns
+
+### jia — Yang Wood (甲)
+
+In Four Pillars tradition, your Day Master is **Yang Wood** — the tall tree. People born under this sign are traditionally described as upright, principled, and quietly ambitious: the tree grows in one direction only, upward, and it does not apologize for taking up sky. You are said to be a natural builder of long-term things — careers, reputations, families, forests of small daily habits — and to find shortcuts vaguely offensive. The classical texts associate Yang Wood with stubbornness in its shadow form: a tree does not bend easily, and when storms come, that can be either heroic or expensive. Growth, for you, tends to be slow, visible, and difficult to reverse — which is exactly why people learn to lean on it.
+
+### yi — Yin Wood (乙)
+
+Your Day Master is **Yin Wood** — the vine, the grass, the flowering plant. Where the tall tree resists the storm, Yin Wood is said to survive it by bending, wrapping, and finding the sunlit gap no one else noticed. Tradition paints this sign as adaptable, socially graceful, and far tougher than it looks: grass is trodden on daily and outlives empires. You are traditionally associated with an instinct for alliances — the vine climbs by choosing the right trellis — and with a gift for making progress look effortless when it was anything but. The shadow side, the old texts warn, is over-accommodation: a vine can wind itself around so many others that it forgets which direction it originally meant to grow.
+
+### bing — Yang Fire (丙)
+
+Your Day Master is **Yang Fire** — the sun itself. This sign is traditionally described as warm, generous, impossible to ignore, and constitutionally incapable of doing anything by halves. The sun does not choose what to illuminate; it shines on everything, which is why Yang Fire people are said to energize whole rooms without trying — and to feel oddly depleted when there is no one around to shine on. Classical readings associate you with openness, big gestures, and a fairness that borders on bluntness. The shadow form is burnout by generosity: even the sun sets daily, and the tradition is unambiguous that Yang Fire does its best work in cycles, not in one endless noon.
+
+### ding — Yin Fire (丁)
+
+Your Day Master is **Yin Fire** — the candle flame, the lamp, the hearth. Unlike the sun, which lights everything indiscriminately, Yin Fire is said to illuminate precisely: one page, one face, one idea at a time. Tradition associates this sign with insight, refinement, and a quietly magnetic warmth that people confide in without quite knowing why. You are traditionally described as perceptive to the point of clairvoyance about others — the candle shows what darkness was hiding. The shadow side is flicker: a small flame is sensitive to every draft, and the old texts advise Yin Fire people to guard their fuel carefully, choosing where to burn rather than burning wherever the wind carries them.
+
+### wu — Yang Earth (戊)
+
+Your Day Master is **Yang Earth** — the mountain. This is traditionally the most immovable of the ten signs: steady, protective, slow to anger, and slower to change its mind. Mountains are said to be where others go for shelter, and Yang Earth people tend to accumulate dependents the way peaks accumulate snow — colleagues, friends, entire families quietly organizing themselves around your reliability. The tradition associates you with deep patience and a long memory, in both its generous and less generous forms. The shadow side is inertia: a mountain confuses "unmoving" with "right." The classical advice is that even mountains are reshaped — by water, by seasons, by time — and the wise ones cooperate with the weathering.
+
+### ji — Yin Earth (己)
+
+Your Day Master is **Yin Earth** — the field, the garden soil. Where the mountain endures, the field *produces*: this sign is traditionally associated with nurture, practicality, and the rare talent of making other things grow. Yin Earth people are said to be the ones who turn ideas into harvests — quietly absorbing seeds, water, neglect, and the occasional storm, and returning something edible anyway. Tradition describes you as tolerant, resourceful, and more strategic than you appear; soil looks passive right up until you notice everything alive is standing in it. The shadow side is depletion: a field that is always giving and never lying fallow loses its richness, and the old texts are firm that Yin Earth must schedule its own off-seasons.
+
+### geng — Yang Metal (庚)
+
+Your Day Master is **Yang Metal** — the axe, the sword, the raw ore. This sign is traditionally described as decisive, dutiful, and allergic to ambiguity: metal exists to cut, and Yang Metal people are said to bring an almost surgical clarity to messes that paralyze everyone else. Tradition associates you with loyalty of the sworn-oath variety, a strong sense of justice, and a certain intolerance for excuses — including, inconveniently, your own. The shadow form is sharpness without a sheath: the same edge that solves problems can nick the people standing nearby. The classical texts note that metal is refined by fire and polished by friction, meaning your hardest seasons have traditionally been the ones that gave you your finish.
+
+### xin — Yin Metal (辛)
+
+Your Day Master is **Yin Metal** — the jewel, the needle, the finely worked blade. This is traditionally the most exacting of the ten signs: precise, aesthetic, quietly proud, and deeply sensitive to quality in all things, including the quality of how you are treated. Yin Metal people are said to possess a needle's gift — small, elegant interventions that hold entire garments together — and a jeweler's eye for the flaw no one else can see. Tradition associates you with refinement and understated influence; the shadow side is the same trait turned inward, where the flaw-detecting eye fixes on yourself. The old texts advise that a gem is not diminished by an imperfect setting — it is simply waiting to be reset.
+
+### ren — Yang Water (壬)
+
+Your Day Master is **Yang Water** — the ocean, the great river. This sign is traditionally associated with vast intelligence, restlessness, and momentum: big water is always going somewhere, and it takes whole landscapes along with it. Yang Water people are said to think in currents rather than steps — ideas arrive in floods, plans reroute overnight, and standing still feels faintly unnatural. Tradition describes you as adventurous, persuasive, and difficult to contain, with a talent for wearing down obstacles that could not be broken. The shadow side is the flood: force without banks scatters its own power. The classical advice for Yang Water is channels — the river that accepts its banks is the one that reaches the sea.
+
+### gui — Yin Water (癸)
+
+Your Day Master is **Yin Water** — the rain, the mist, the mountain spring. This is traditionally the subtlest of the ten signs: intuitive, imaginative, and quietly pervasive in the way of morning fog that has occupied the whole valley before anyone noticed it arriving. Yin Water people are said to understand things sideways — through feeling, pattern, and atmosphere — and to be the tradition's natural dreamers, healers, and readers of rooms. You are associated with a gentleness that is routinely underestimated; rain, after all, is what carves canyons. The shadow side is dissipation: mist can drift anywhere, which is not the same as arriving. The old texts suggest Yin Water does best with a vessel — one clear intention to gather itself into.
+
+---
+
+## SECTION 2: Element Balance (五行バランス) — 5 patterns + balanced
+
+### wood_dominant
+
+Your chart runs rich in **Wood**. In the traditional reading, this is a surplus of growth-energy: plans, projects, and new branches in every direction. Charts like this are associated with vision and restlessness in equal measure — the forest always wants one more tree. The classical caution is over-extension: Wood in excess is said to crowd its own canopy, starting more than it finishes. The traditional remedy is pruning — deliberately choosing fewer branches so the strongest ones thicken. Your strength is that you never lack a direction; your art is subtraction.
+
+### fire_dominant
+
+Your chart runs hot with **Fire**. Traditionally this reads as abundance of expression, passion, and visibility — charts like this belong to people who are *felt* when they enter a room, for better and occasionally for louder. Fire in surplus is associated with brilliance and impatience braided together: everything wants to happen now, at full brightness. The classical caution is fuel management — a fire that consumes everything near it ends up alone in the ash. The traditional counsel is rhythm: bright hours and banked hours, deliberately alternated. Your strength is heat; your art is knowing what deserves it.
+
+### earth_dominant
+
+Your chart is weighted toward **Earth**. In traditional readings this signals stability in unusual quantity: reliability, patience, and the kind of trustworthiness that entire groups quietly build their foundations on. Earth-heavy charts are associated with endurance and accumulation — of skills, of resources, of people who count on you. The classical caution is heaviness: too much earth is said to bury its own seeds, mistaking caution for wisdom and comfort for safety. The traditional counsel is cultivation — turning the soil on purpose, before life turns it for you. Your strength is that you hold; your art is choosing when to let go.
+
+### metal_dominant
+
+Your chart is rich in **Metal**. Traditionally this is read as an abundance of structure: discipline, standards, clear judgment, and an instinct for cutting through noise to the true shape of things. Metal-heavy charts are associated with people who finish what others only outline, and whose word functions as a contract. The classical caution is rigidity — metal in excess is said to prize the rule over the reason it was made, and sharpness over warmth. The traditional counsel is tempering: the finest blades are the ones that learned flexibility in the fire. Your strength is your edge; your art is your sheath.
+
+### water_dominant
+
+Your chart flows heavy with **Water**. In the traditional reading this is a surplus of mind: curiosity, intuition, adaptability, and thoughts that run all night like a river under ice. Water-heavy charts are associated with wisdom and wandering in equal measure — you absorb everything, connect everything, and occasionally drown your own decisions in one more round of considering. The classical caution is formlessness: water takes the shape of whatever contains it, which is a gift right up until nothing does. The traditional counsel is vessels — commitments chosen deliberately, so all that current turns a wheel. Your strength is depth; your art is direction.
+
+### balanced
+
+Your chart shows an unusually even spread across all five elements. Tradition regards this as its own distinct signature — the generalist's chart, associated with versatility, steadiness under change, and an instinctive sense of proportion that others find calming. Balanced charts are said to lack the dramatic peaks of element-heavy ones, and also their dramatic cliffs: you can operate in almost any season. The classical caution is diffusion — being capable of everything can postpone choosing anything. The traditional counsel is voluntary intensity: pick one element's virtue per season and lean into it on purpose. Your strength is range; your art is commitment.
+
+---
+
+## SECTION 3: 2026 Year Fortune (年運, 丙午 Yang Fire Horse year) — keyed by Day Master element
+
+### year2026_wood
+
+2026 is the year of the **Fire Horse** — and in the five-element cycle, Wood feeds Fire. Traditionally, this makes it a year when your efforts convert unusually well into visible results: what you've grown becomes fuel for something bright. The classical reading is favorable for launches, performances, and stepping forward — with the gentle caution that feeding fire depletes wood. Traditionally, this is a year to shine deliberately and rest deliberately, in that order.
+
+### year2026_fire
+
+2026 is the year of the **Fire Horse** — your own element, doubled and set galloping. Traditionally this reads as a peak-visibility year: momentum comes easily, attention finds you, and bold moves are said to land better than careful ones. The classical caution for fire-in-a-fire-year is excess — every flame invited to become a bonfire. Tradition counsels choosing your one great blaze for the year rather than scattering sparks, and keeping a little fuel unburned for the year that follows.
+
+### year2026_earth
+
+2026 is the year of the **Fire Horse** — and in the five-element cycle, Fire creates Earth. Traditionally, this makes it a nourishing year for you: the year's heat and drama tend to settle, in the end, as new solid ground under your feet. Classical readings associate years like this with consolidation disguised as chaos — opportunities arriving loudly but rewarding the person calm enough to receive them. Tradition suggests saying yes to warmth, and letting the noise pass through.
+
+### year2026_metal
+
+2026 is the year of the **Fire Horse** — and in the traditional cycle, Fire works on Metal the way a forge works on a blade. This is classically read as a tempering year: heated moments, real pressure, and by year's end, a noticeably sharper you. The old texts frame years like this as transformative rather than comfortable — the fire is not your enemy; it is your smith. Tradition counsels flexibility during the hot months and quiet pride in December.
+
+### year2026_water
+
+2026 is the year of the **Fire Horse** — the element opposite yours, which tradition reads not as misfortune but as *demand*. Water meets a fire year the way rain meets a heat wave: everything asks for you at once. Classically this is a year when your calm, depth, and perspective become scarce resources others actively seek — influential, if tiring. Tradition counsels boundaries drawn early and replenishment scheduled like appointments: the well that manages its water ends the drought richer than it began.
+
+---
+
+## SECTION 4: Closing (共通、全鑑定末尾)
+
+### closing_common
+
+A Four Pillars chart is traditionally read as a map of tendencies, not a verdict — the weather you were born into, never the journey you make through it. Take what resonates, leave what doesn't, and remember that in this tradition, knowing your chart was always meant for one purpose only: choosing your next step with clearer eyes.
+
+*This reading is for entertainment and cultural interest. It is not medical, legal, or financial advice.*
+
+<!--
+組み合わせ数: 10 (dayMaster) × 6 (balance) × 5 (year, 日主五行で自動決定) = 60ユニーク鑑定 + 共通closing
+文字数目安: 合成後 350–450 words / 鑑定
+クロコへ: JSON化の際、キー名は上記見出しのsnake_caseをそのまま使用のこと (jia, yi, bing... / wood_dominant... / year2026_wood...)
+-->
