@@ -1,0 +1,20 @@
+# GitHub Pages (Jekyll, legacy build).
+# Keep source & dev files tracked in the repo, but OUT of the published site.
+# Internal drafts/specs must never be served at japanesefortune.com.
+#
+#   docs/     internal drafts + specs (readings-daily.md, launch-setup.md, qa-checklist.md)
+#   content/  article drafts + readings-templates.md (build-time source only)
+#   tools/    one-shot generators (build-time only)
+#   test/     unit tests
+#
+# The live site only needs: index.html, reading/, the generated <slug>/ dirs,
+# assets/, data/, sitemap.xml, robots.txt, CNAME — none of which are excluded.
+# (Dotfiles like .gitignore are already skipped by Jekyll.)
+exclude:
+  - docs
+  - content
+  - tools
+  - test
+  - README.md
+  - package.json
+  - package-lock.json
