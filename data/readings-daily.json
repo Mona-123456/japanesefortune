@@ -1,0 +1,27 @@
+{
+  "_comment": "日運 (Daily Fortune) テンプレの器。中身の原稿は readings-daily.md 納品後にここへ転記する（Mona編集可）。合成順: general[今日の日干 stem.key] + personal[日主×今日の生剋 relation] + closing。六星占術は一切含めない（spec §0/§6）。",
+  "version": "0.1-scaffold",
+  "disclaimer": "For entertainment purposes only. Not medical, legal, or financial advice.",
+  "closing": "",
+  "_general_note": "今日の五行×陰陽 = 今日の日干10種。閲覧者共通の当日トーン。キーは stem.key (jia..gui)。",
+  "general": {
+    "jia": "",
+    "yi": "",
+    "bing": "",
+    "ding": "",
+    "wu": "",
+    "ji": "",
+    "geng": "",
+    "xin": "",
+    "ren": "",
+    "gui": ""
+  },
+  "_personal_note": "日主の五行 × 今日の五行 の生剋関係5種（日主から見た今日の位置づけ）。peer=比和（同五行） / output=日主が生じる（食傷・泄） / resource=日主を生じる（印・生） / wealth=日主が剋す（財） / authority=日主を剋す（官殺）。",
+  "personal": {
+    "peer": "",
+    "output": "",
+    "resource": "",
+    "wealth": "",
+    "authority": ""
+  }
+}

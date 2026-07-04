@@ -203,4 +203,23 @@ export function computeChart({ year, month, day, hour = null, minute = 0, place 
   };
 }
 
+/**
+ * Day pillar (day ganzhi 日干支) for any civil date — the same verified JDN
+ * calculation the full chart uses, exposed for daily-fortune (日運) features.
+ * The day pillar depends only on the calendar date (independent of hour, place,
+ * and the 節入り solar-term boundaries, which only affect the year/month pillars).
+ */
+export function dayPillarOf(year, month, day) {
+  if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day)) {
+    throw new TypeError("year, month, and day are required integers");
+  }
+  return dayPillar(year, month, day);
+}
+
+/** Day pillar for "today" in the viewer's local timezone. */
+export function todayPillar() {
+  const d = new Date();
+  return dayPillar(d.getFullYear(), d.getMonth() + 1, d.getDate());
+}
+
 export { pillarFromIndex, indexFromStemBranch };
