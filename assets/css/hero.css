@@ -2,7 +2,9 @@
    Homepage hero — full-bleed character art with live HTML text overlay.
    Built on tokens.css. Two art directions (spec §0/§4):
      • Desktop (≥48rem): horizontal art, person on the RIGHT → text left-aligned.
-     • Mobile  (<48rem): vertical art, person centre-right → heading TOP, CTA BOTTOM.
+     • Mobile  (<48rem): vertical art — only the heading overlays the top night-sky
+       band; the lede + CTA sit BELOW the image on the plain page background, so
+       nothing readable ever lands on the person.
    No text is burned into the art; all wording is here.
    ========================================================================== */
 
@@ -63,6 +65,7 @@
   max-width: 30rem;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
 }
+.hero__body { display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start; }
 .hero__cta { display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-start; }
 .hero__note { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--color-text-muted); }
 
@@ -81,11 +84,50 @@
     gap: var(--space-6);
     padding-block: var(--space-8);
   }
-  .hero__cta { margin-top: var(--space-3); }
 }
 
-/* Small phones: tighten the vertical rhythm a touch */
+/* ---------- Mobile: heading over the top band; body below on plain bg ------- */
+@media (max-width: 47.99rem) {
+  .hero { display: block; }
+
+  /* Image becomes a fixed top band (not a full-bleed fill).
+     display:block is required — <picture> is inline by default, so height is
+     ignored without it (base makes it block only via position:absolute). */
+  .hero__img { position: relative; display: block; height: 70vh; height: 70svh; }
+  /* Scrim darkens only the band's top, for heading legibility. */
+  .hero__scrim {
+    inset: 0 0 auto 0;
+    height: 70vh; height: 70svh;
+    background: linear-gradient(180deg, rgba(11, 10, 9, 0.80) 0%, rgba(11, 10, 9, 0.15) 42%, rgba(11, 10, 9, 0) 62%);
+  }
+
+  /* Static so the heading can anchor to .hero; body flows below the band. */
+  .hero__content { position: static; display: block; min-height: 0; padding-block: 0; }
+
+  /* Heading only, overlaid on the top sky. */
+  .hero__text {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 3;
+    max-width: none;
+    padding: var(--space-6) var(--space-5) 0;
+  }
+
+  /* Lede + CTA below the image, on the plain page background. */
+  .hero__body { padding-block: var(--space-6) var(--space-8); gap: var(--space-4); }
+  .hero__lede {
+    color: var(--color-text-muted);
+    text-shadow: none;
+    font-size: var(--fs-base);
+    max-width: none;
+  }
+  .hero__cta { align-items: stretch; }
+  .hero__cta .btn { width: 100%; }
+  .hero__note { text-align: center; }
+}
+
+/* Small phones: give the body a bit more room by shortening the band. */
 @media (max-width: 26rem) {
-  .hero__content { min-height: 90svh; padding-block: var(--space-6) var(--space-7); }
-  .hero__lede { font-size: var(--fs-base); }
+  .hero__img,
+  .hero__scrim { height: 64vh; height: 64svh; }
 }
