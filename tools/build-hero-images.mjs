@@ -28,10 +28,11 @@ mkdirSync(OUT, { recursive: true });
 const MASTER_DESKTOP = join(ROOT, "content", "hero-master-desktop.png");
 const MASTER_MOBILE = join(ROOT, "content", "hero-master-mobile.png");
 
-// §4 (b): pixels of sky added above the mobile master. Chosen so the face-top
-// (~29% of 4344 ≈ 1260px) lands near 37% → room for a headline in the top band.
-const MOBILE_TOP_EXTEND = 560;
-const SKY = { r: 12, g: 12, b: 14 }; // sampled from the master's top-centre
+// §4 (b): pixels of sky added above the mobile master so the face + moon clear
+// the top heading band. Tuned per master: current mira-6 face-top ~31% of 4479
+// (≈1388px); +640 → face-top ~40%, moon-top ~32% (both below the top-30% zone).
+const MOBILE_TOP_EXTEND = 640;
+const SKY = { r: 9, g: 9, b: 11 }; // sampled from the master's top-centre (near-black)
 
 const WEBP = { quality: 82 };
 const AVIF = { quality: 52, effort: 4 };
