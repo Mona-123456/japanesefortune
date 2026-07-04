@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Homepage hero — full-bleed character art with live HTML text overlay.
+   Built on tokens.css. Two art directions (spec §0/§4):
+     • Desktop (≥48rem): horizontal art, person on the RIGHT → text left-aligned.
+     • Mobile  (<48rem): vertical art, person centre-right → heading TOP, CTA BOTTOM.
+   No text is burned into the art; all wording is here.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  overflow: hidden;
+}
+
+/* The image layer */
+.hero__img,
+.hero__img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero__img img {
+  object-fit: cover;
+  object-position: 50% 35%; /* mobile: fills height, keep centre */
+}
+
+/* Legibility scrim (mobile: darken top heading zone + bottom CTA zone) */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(11, 10, 9, 0.72) 0%, rgba(11, 10, 9, 0) 34%),
+    linear-gradient(0deg, rgba(11, 10, 9, 0.80) 0%, rgba(11, 10, 9, 0) 32%);
+  pointer-events: none;
+}
+
+/* Content overlay */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 92svh;
+  min-height: 92vh; /* fallback for older browsers */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* mobile: heading top, CTA bottom */
+  padding-block: var(--space-7) var(--space-8);
+  gap: var(--space-6);
+}
+
+.hero__text { max-width: 34rem; }
+.hero h1 {
+  font-size: clamp(var(--fs-2xl), 8vw, var(--fs-4xl));
+  line-height: 1.08;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+.hero__lede {
+  color: var(--color-text);
+  font-size: var(--fs-lg);
+  max-width: 30rem;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
+}
+.hero__cta { display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-start; }
+.hero__note { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--color-text-muted); }
+
+/* ---------- Desktop: horizontal art, text block left & vertically centred --- */
+@media (min-width: 48rem) {
+  .hero__img img { object-position: 68% 22%; } /* keep person (right) + face (top) */
+  /* Left-to-right scrim so the left text is legible and the person stays clear */
+  .hero__scrim {
+    background:
+      linear-gradient(90deg, rgba(11, 10, 9, 0.82) 0%, rgba(11, 10, 9, 0.45) 34%, rgba(11, 10, 9, 0) 62%),
+      linear-gradient(0deg, rgba(11, 10, 9, 0.35) 0%, rgba(11, 10, 9, 0) 22%);
+  }
+  .hero__content {
+    min-height: min(90vh, 820px);
+    justify-content: center; /* desktop: vertically centred block */
+    gap: var(--space-6);
+    padding-block: var(--space-8);
+  }
+  .hero__cta { margin-top: var(--space-3); }
+}
+
+/* Small phones: tighten the vertical rhythm a touch */
+@media (max-width: 26rem) {
+  .hero__content { min-height: 90svh; padding-block: var(--space-6) var(--space-7); }
+  .hero__lede { font-size: var(--fs-base); }
+}

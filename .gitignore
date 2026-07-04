@@ -5,5 +5,10 @@ Thumbs.db
 .env
 .env.*
 
-# Internal strategy / legal spec — keep local, do not publish
+# Internal strategy / legal / art specs — keep local, do not publish
 japanese-fortune-mvp-spec.md
+hero-image-spec.md
+
+# Hero art masters (12–13MB each): archived locally in content/, not served.
+# Inputs to `npm run build:hero`; the committed derivatives in assets/img/ ship.
+content/hero-master-*.png

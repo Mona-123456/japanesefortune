@@ -38,9 +38,14 @@ Test in browser devtools **and** at least one real phone. Widths to cover:
 - [ ] Footer disclaimer readable on every page (legal requirement).
 - [ ] iOS Safari: `100vh`/sticky header behaves; native date/time pickers open; no rubber-band overflow.
 
-### Homepage `/`
+### Homepage `/` — hero art
+- [ ] **Desktop (≥48rem)**: horizontal art, person on the right; heading/lede/CTA sit **left**, vertically centred, legible over the left scrim; person not covered by text.
+- [ ] **Mobile (<48rem)**: vertical art; **heading at top, CTA at bottom**; the top band is clear sky (face is NOT covered by the heading — the §4 (b) canvas extension). No visible seam where the sky was extended.
+- [ ] No text is baked into the image; all wording is live HTML and re-flows.
+- [ ] **LCP**: hero image loads fast (AVIF/WebP srcset, `fetchpriority=high`). Check DevTools ▶ Performance / Lighthouse — hero should be the LCP element and stay within the 90+ budget; confirm the right variant loads (mobile vertical on phones, desktop horizontal on wide).
 - [ ] Hero CTA button reachable and large; article cards stack to one column and are tappable.
 - [ ] The 5 guide cards link to the right articles.
+- [ ] OG share preview for `/` shows the `hero-og.jpg` character crop (person right, no text).
 
 ### Reading tool `/reading/`
 - [ ] Date field required-validation shows a friendly message when empty.

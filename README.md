@@ -41,12 +41,21 @@ the five article pages and the social images are **generated** from the drafts i
 
 ```bash
 npm run build:articles   # content/article-*.md → <slug>/index.html + sitemap.xml
-npm run build:og         # → assets/img/og-*.png   (needs the dev dependency)
-npm run build            # both
+npm run build:og         # → assets/img/og-*.png       (needs @napi-rs/canvas)
+npm run build:hero       # hero art → assets/img/hero-* (needs sharp)
+npm run build            # all three
 ```
 
-`build:articles` needs only Node. `build:og` needs `@napi-rs/canvas`
-(`npm install`). Generated files are committed so GitHub Pages serves them directly.
+`build:articles` needs only Node; `build:og` needs `@napi-rs/canvas`; `build:hero`
+needs `sharp` (both in devDependencies — run `npm install`). Generated files are
+committed so GitHub Pages serves them directly.
+
+**Hero art masters** live at `content/hero-master-mobile.png` (vertical) and
+`content/hero-master-desktop.png` (horizontal). They are **git-ignored** (12–13 MB
+each, and kept off the public site); keep them in your local `content/` to re-run
+`build:hero`. The script also applies the §4 safe-area fix (extends the vertical
+canvas upward so the face clears the heading zone) and emits the WebP/AVIF srcset
+widths + the 1200×630 OGP crop.
 
 ## Four Pillars engine (`assets/js/fourpillars/`)
 

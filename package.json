@@ -8,14 +8,16 @@
     "test": "node --test",
     "build:articles": "node tools/build-articles.mjs",
     "build:og": "node tools/build-og-images.mjs",
-    "build": "npm run build:articles && npm run build:og",
+    "build:hero": "node tools/build-hero-images.mjs",
+    "build": "npm run build:articles && npm run build:og && npm run build:hero",
     "serve": "python -m http.server 8080"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
-    "@napi-rs/canvas": "^0.1.60"
+    "@napi-rs/canvas": "^0.1.60",
+    "sharp": "^0.33.0"
   },
   "license": "UNLICENSED"
 }
