@@ -1,0 +1,23 @@
+{
+  "_comment": "支・干の関係表（相性の入力）。branch/stem キーは constants.js の key。ペアは順不同。Mona編集可。断定的な吉凶は含めない（値のみ、解釈は原稿側）。",
+  "branch": {
+    "combine_six":  { "_label": "支合 (六合)", "pairs": [["zi","chou"],["yin","hai"],["mao","xu"],["chen","you"],["si","shen"],["wu","wei"]] },
+    "combine_three":{ "_label": "三合 (局)", "groups": [
+      { "branches": ["shen","zi","chen"], "element": "water" },
+      { "branches": ["hai","mao","wei"],  "element": "wood" },
+      { "branches": ["yin","wu","xu"],    "element": "fire" },
+      { "branches": ["si","you","chou"],  "element": "metal" }
+    ] },
+    "clash":  { "_label": "冲 (七冲)", "pairs": [["zi","wu"],["chou","wei"],["yin","shen"],["mao","you"],["chen","xu"],["si","hai"]] },
+    "harm":   { "_label": "六害", "pairs": [["zi","wei"],["chou","wu"],["yin","si"],["mao","chen"],["shen","hai"],["you","xu"]] },
+    "break":  { "_label": "破", "pairs": [["zi","you"],["chou","chen"],["yin","hai"],["mao","wu"],["si","shen"],["wei","xu"]] },
+    "punish": { "_label": "刑",
+      "triads": [["yin","si","shen"],["chou","xu","wei"]],
+      "mutual": [["zi","mao"]],
+      "self":   ["chen","wu","you","hai"]
+    }
+  },
+  "stem": {
+    "combine": { "_label": "干合 (5組)", "pairs": [["jia","ji"],["yi","geng"],["bing","xin"],["ding","ren"],["wu","gui"]] }
+  }
+}

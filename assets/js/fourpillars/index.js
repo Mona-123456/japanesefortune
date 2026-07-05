@@ -14,3 +14,14 @@ export { computeChart, dayPillarOf, todayPillar } from "./ganzhi.js";
 export { risshun, solarTermInstant, monthTermBoundaries } from "./solar-terms.js";
 export { STEMS, BRANCHES, ELEMENTS, ELEMENT_LABELS } from "./constants.js";
 export { CITIES, cityById, localTimeCorrection, equationOfTimeMinutes } from "./localtime.js";
+// Phase 2 derivation layer (pure derivations over the four pillars)
+export {
+  fiveElementRelation,
+  tenGod, tenGodsOf, TEN_GODS, TEN_GOD_LABELS,
+  hiddenStemsOf,
+  twelveStageOf, twelveStagesOf,
+  voidBranches,
+  strengthOf, STRENGTH_WEIGHTS,
+  luckDirection, luckPeriods,
+  branchRelationsBetween, stemRelationBetween, compatibility, COMPAT_WEIGHTS,
+} from "./derivation.js";

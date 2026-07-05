@@ -25,18 +25,18 @@ export const STEMS = [
  * five-element balance count in the MVP.
  */
 export const BRANCHES = [
-  { cn: "子", romaji: "Ne",   zodiac: "Rat",     element: "water" },
-  { cn: "丑", romaji: "Ushi", zodiac: "Ox",      element: "earth" },
-  { cn: "寅", romaji: "Tora", zodiac: "Tiger",   element: "wood"  },
-  { cn: "卯", romaji: "U",    zodiac: "Rabbit",  element: "wood"  },
-  { cn: "辰", romaji: "Tatsu",zodiac: "Dragon",  element: "earth" },
-  { cn: "巳", romaji: "Mi",   zodiac: "Snake",   element: "fire"  },
-  { cn: "午", romaji: "Uma",  zodiac: "Horse",   element: "fire"  },
-  { cn: "未", romaji: "Hitsuji", zodiac: "Goat", element: "earth" },
-  { cn: "申", romaji: "Saru", zodiac: "Monkey",  element: "metal" },
-  { cn: "酉", romaji: "Tori", zodiac: "Rooster", element: "metal" },
-  { cn: "戌", romaji: "Inu",  zodiac: "Dog",     element: "earth" },
-  { cn: "亥", romaji: "I",    zodiac: "Pig",     element: "water" },
+  { cn: "子", key: "zi",   romaji: "Ne",   zodiac: "Rat",     element: "water" },
+  { cn: "丑", key: "chou", romaji: "Ushi", zodiac: "Ox",      element: "earth" },
+  { cn: "寅", key: "yin",  romaji: "Tora", zodiac: "Tiger",   element: "wood"  },
+  { cn: "卯", key: "mao",  romaji: "U",    zodiac: "Rabbit",  element: "wood"  },
+  { cn: "辰", key: "chen", romaji: "Tatsu",zodiac: "Dragon",  element: "earth" },
+  { cn: "巳", key: "si",   romaji: "Mi",   zodiac: "Snake",   element: "fire"  },
+  { cn: "午", key: "wu",   romaji: "Uma",  zodiac: "Horse",   element: "fire"  },
+  { cn: "未", key: "wei",  romaji: "Hitsuji", zodiac: "Goat", element: "earth" },
+  { cn: "申", key: "shen", romaji: "Saru", zodiac: "Monkey",  element: "metal" },
+  { cn: "酉", key: "you",  romaji: "Tori", zodiac: "Rooster", element: "metal" },
+  { cn: "戌", key: "xu",   romaji: "Inu",  zodiac: "Dog",     element: "earth" },
+  { cn: "亥", key: "hai",  romaji: "I",    zodiac: "Pig",     element: "water" },
 ];
 
 /** Five elements 五行, canonical order 木火土金水. */

@@ -12,10 +12,7 @@
    ========================================================================== */
 
 import { STEMS } from "../fourpillars/constants.js";
-
-// Five-element cycles. GENERATES: 木→火→土→金→水→木 (相生). CONTROLS: 木→土→水→火→金→木 (相剋).
-const GENERATES = { wood: "fire", fire: "earth", earth: "metal", metal: "water", water: "wood" };
-const CONTROLS = { wood: "earth", earth: "water", water: "fire", fire: "metal", metal: "wood" };
+import { fiveElementRelation } from "../fourpillars/derivation.js";
 
 /** The five Day-Master-vs-today relations (for validating the 50 personal keys). */
 export const DAILY_RELATIONS = ["peer", "output", "resource", "wealth", "authority"];
@@ -24,17 +21,9 @@ export const DAILY_RELATIONS = ["peer", "output", "resource", "wealth", "authori
  * Relation of `todayElement` seen from the Day Master `dmElement`:
  *   peer 比和 / output 食傷(dm→today) / resource 印(today→dm) /
  *   wealth 財(dm⇒today) / authority 官殺(today⇒dm).
- * Exhaustive & mutually exclusive over any two of the five elements. Not used to
- * pick templates (the draft writes all 50 explicitly) — kept for verification.
+ * Canonical implementation lives in the derivation layer (single source of truth).
  */
-export function dailyRelation(dmElement, todayElement) {
-  if (dmElement === todayElement) return "peer";
-  if (GENERATES[dmElement] === todayElement) return "output";
-  if (GENERATES[todayElement] === dmElement) return "resource";
-  if (CONTROLS[dmElement] === todayElement) return "wealth";
-  if (CONTROLS[todayElement] === dmElement) return "authority";
-  throw new Error(`invalid element pair: ${dmElement} / ${todayElement}`);
-}
+export const dailyRelation = fiveElementRelation;
 
 /** general key for a day pillar: `general_{element}_{yin|yang}`. */
 export function generalKeyFor(dayPillar) {

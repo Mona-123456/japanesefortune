@@ -1,0 +1,17 @@
+{
+  "_comment": "蔵干 (hidden stems): 各地支に含まれる天干。role: primary=本気, middle=中気, residual=余気。stem/branch キーは constants.js の key。Mona編集可。通変星・身強身弱の入力。",
+  "table": {
+    "zi":   [{ "stem": "gui",  "role": "primary" }],
+    "chou": [{ "stem": "ji",   "role": "primary" }, { "stem": "gui", "role": "middle" }, { "stem": "xin", "role": "residual" }],
+    "yin":  [{ "stem": "jia",  "role": "primary" }, { "stem": "bing","role": "middle" }, { "stem": "wu",  "role": "residual" }],
+    "mao":  [{ "stem": "yi",   "role": "primary" }],
+    "chen": [{ "stem": "wu",   "role": "primary" }, { "stem": "yi",  "role": "middle" }, { "stem": "gui", "role": "residual" }],
+    "si":   [{ "stem": "bing", "role": "primary" }, { "stem": "geng","role": "middle" }, { "stem": "wu",  "role": "residual" }],
+    "wu":   [{ "stem": "ding", "role": "primary" }, { "stem": "ji",  "role": "middle" }],
+    "wei":  [{ "stem": "ji",   "role": "primary" }, { "stem": "ding","role": "middle" }, { "stem": "yi",  "role": "residual" }],
+    "shen": [{ "stem": "geng", "role": "primary" }, { "stem": "ren", "role": "middle" }, { "stem": "wu",  "role": "residual" }],
+    "you":  [{ "stem": "xin",  "role": "primary" }],
+    "xu":   [{ "stem": "wu",   "role": "primary" }, { "stem": "xin", "role": "middle" }, { "stem": "ding","role": "residual" }],
+    "hai":  [{ "stem": "ren",  "role": "primary" }, { "stem": "jia", "role": "middle" }]
+  }
+}
