@@ -135,14 +135,33 @@ export function voidBranches(dayIndex60) {
 export const STRENGTH_WEIGHTS = { resource: +1, authority: -1, monthSupport: +1, stage: 0 };
 
 /**
+ * Classification thresholds (tunable). A middle 中和 (balanced) band keeps
+ * borderline charts off the extremes — without it, any score ≠ 0 spins hard to
+ * 身旺/身弱, which is exactly what strength-spin.md's neutral middle needs to
+ * avoid. Default: score in [-2, 2] → balanced.
+ *   score >  balancedMax → robust (身旺)
+ *   score <  balancedMin → weak   (身弱)
+ *   otherwise            → balanced (中和)
+ */
+export const STRENGTH_THRESHOLDS = { balancedMin: -2, balancedMax: 2 };
+
+/** Classify a numeric strength score into weak / balanced / robust. */
+export function classifyStrength(score, t = STRENGTH_THRESHOLDS) {
+  if (score > t.balancedMax) return { label: "robust", cn: "身旺" };
+  if (score < t.balancedMin) return { label: "weak", cn: "身弱" };
+  return { label: "balanced", cn: "中和" };
+}
+
+/**
  * Body-strength score. Over the seven non-day-master characters (3 stems + 4
  * branch principal elements): a character that GENERATES the day master
  * (resource/印) adds +1, one that CONTROLS it (authority/官殺) subtracts 1;
  * others are neutral. A month branch that supports the day master (得令) adds a
  * further +1. The twelve-stage term is weight 0 (kept for future tuning).
- * score > 0 → robust (身旺), else weak (身弱). Returns the numeric score too.
+ * The numeric score is classified via STRENGTH_THRESHOLDS (weak/balanced/robust);
+ * the raw score is always returned so the middle band can be re-tuned freely.
  */
-export function strengthOf(chart, weights = STRENGTH_WEIGHTS) {
+export function strengthOf(chart, weights = STRENGTH_WEIGHTS, thresholds = STRENGTH_THRESHOLDS) {
   const dmEl = chart.dayMaster.element;
   const chars = [
     chart.pillars.year?.stem, chart.pillars.month?.stem, chart.pillars.hour?.stem,
@@ -163,10 +182,11 @@ export function strengthOf(chart, weights = STRENGTH_WEIGHTS) {
     controls * weights.authority +
     monthSupport * weights.monthSupport;
 
+  const { label, cn } = classifyStrength(score, thresholds);
   return {
     score,
-    label: score > 0 ? "robust" : "weak",   // 身旺 / 身弱
-    cn: score > 0 ? "身旺" : "身弱",
+    label,   // weak (身弱) | balanced (中和) | robust (身旺)
+    cn,
     detail: { generates, controls, monthSupport, dayMasterElement: dmEl },
   };
 }

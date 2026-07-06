@@ -21,7 +21,7 @@ export {
   hiddenStemsOf,
   twelveStageOf, twelveStagesOf,
   voidBranches,
-  strengthOf, STRENGTH_WEIGHTS,
+  strengthOf, classifyStrength, STRENGTH_WEIGHTS, STRENGTH_THRESHOLDS,
   luckDirection, luckPeriods,
   branchRelationsBetween, stemRelationBetween, compatibility, COMPAT_WEIGHTS,
 } from "./derivation.js";

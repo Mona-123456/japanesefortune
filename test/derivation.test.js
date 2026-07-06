@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import { computeChart } from "../assets/js/fourpillars/ganzhi.js";
 import {
   fiveElementRelation, tenGod, tenGodsOf, hiddenStemsOf,
-  twelveStageOf, twelveStagesOf, voidBranches, strengthOf,
+  twelveStageOf, twelveStagesOf, voidBranches, strengthOf, classifyStrength,
   luckDirection, luckPeriods, branchRelationsBetween, stemRelationBetween, compatibility,
 } from "../assets/js/fourpillars/derivation.js";
 
@@ -87,13 +87,23 @@ test("void branches by 旬: 甲子旬 → 戌亥, 甲寅旬 → 子丑", () => {
 });
 
 /* --- §5 身強身弱 ----------------------------------------------------------- */
-test("strength of the golden = 身旺 (robust), score > 0", () => {
+test("strength of the golden: score +1 → 中和 (balanced band absorbs the borderline)", () => {
   const s = strengthOf(GOLD);
-  assert.equal(s.label, "robust");
-  assert.equal(s.cn, "身旺");
-  assert.ok(s.score > 0, `score ${s.score}`);
+  assert.equal(s.score, 1);            // 子,亥 印 (+2) − 庚,申 官 (−2) + 月令 (+1)
+  assert.equal(s.label, "balanced");   // マニアック flatly calls it 身旺, but +1 is 中和寄り
+  assert.equal(s.cn, "中和");
   assert.equal(s.detail.generates, 2); // 子, 亥 (water → wood)
   assert.equal(s.detail.controls, 2);  // 庚, 申 (metal → wood)
+});
+
+test("strength classification has a middle 中和 band (default ±2)", () => {
+  assert.deepEqual(classifyStrength(3), { label: "robust", cn: "身旺" });
+  assert.deepEqual(classifyStrength(2), { label: "balanced", cn: "中和" });
+  assert.deepEqual(classifyStrength(0), { label: "balanced", cn: "中和" });
+  assert.deepEqual(classifyStrength(-2), { label: "balanced", cn: "中和" });
+  assert.deepEqual(classifyStrength(-3), { label: "weak", cn: "身弱" });
+  // thresholds are tunable
+  assert.equal(classifyStrength(1, { balancedMin: 0, balancedMax: 0 }).label, "robust");
 });
 
 /* --- §6 大運 --------------------------------------------------------------- */
