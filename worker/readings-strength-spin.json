@@ -1,0 +1,6 @@
+{
+  "_comment": "強弱スピン有料本文の器。源: readings-strength-spin.md。カテゴリ: classifyStrength() の robust→strong / weak / balanced。balanced は両スピンを弱め versatility 基調。WORKER側専用（spec §0）。",
+  "version": "0.1-scaffold",
+  "_balanced_note": "中和: 強弱スピンを弱め、versatility(適応・両利き)基調。断定回避。",
+  "categories": { "strong": "", "weak": "", "balanced": "" }
+}

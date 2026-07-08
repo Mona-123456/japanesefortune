@@ -1,0 +1,9 @@
+{
+  "_comment": "相性有料本文の器。源: readings-compatibility.md。intro → stem(天干) → branch(地支,複数可) → strength_mesh(強弱噛み合い) → compat_closing。verdict禁止。WORKER側専用（spec §0）。",
+  "version": "0.1-scaffold",
+  "intro": "",
+  "stem": { "peer": "", "output": "", "resource": "", "wealth": "", "authority": "", "combine": "", "ten_sen_chi_chu": "" },
+  "branch": { "combine_six": "", "combine_three": "", "clash": "", "harm": "", "break": "", "punish": "", "punish_self": "" },
+  "strength_mesh": { "strong_strong": "", "strong_weak": "", "strong_balanced": "", "weak_weak": "", "weak_balanced": "", "balanced_balanced": "" },
+  "compat_closing": ""
+}

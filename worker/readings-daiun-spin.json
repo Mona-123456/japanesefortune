@@ -1,0 +1,6 @@
+{
+  "_comment": "大運スピン有料本文の器。源: readings-daiun-spin.md。by_god=通変星テーマ(10) + by_stage=十二運局面(12)。強弱と掛ける。WORKER側専用（spec §0）。",
+  "version": "0.1-scaffold",
+  "by_god": { "peer": "", "rival": "", "creative": "", "expressive": "", "fortune": "", "steady_wealth": "", "challenge": "", "authority": "", "insight": "", "wisdom": "" },
+  "by_stage": { "chosei": "", "mokuyoku": "", "kantai": "", "kenroku": "", "teio": "", "sui": "", "byo": "", "shi": "", "bo": "", "zetsu": "", "tai": "", "yo": "" }
+}

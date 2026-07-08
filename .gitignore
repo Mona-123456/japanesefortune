@@ -9,6 +9,7 @@ Thumbs.db
 japanese-fortune-mvp-spec.md
 hero-image-spec.md
 docs/phase2-derivation-spec.md
+docs/phase2-synthesis-spec.md
 
 # Hero art masters (12–13MB each): archived locally in content/, not served.
 # Inputs to `npm run build:hero`; the committed derivatives in assets/img/ ship.

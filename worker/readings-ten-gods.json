@@ -1,0 +1,16 @@
+{
+  "_comment": "通変星 (ten gods) 有料本文の器。源: readings-ten-gods.md（クロちゃん納品後に転記）。base=有料本文のみ（無料teaserは data/star-teasers.json）。WORKER側専用 — clientに配信しない（spec §0）。キーは derivation.js の TEN_GODS。",
+  "version": "0.1-scaffold",
+  "gods": {
+    "peer":          { "cn": "比肩", "base": "" },
+    "rival":         { "cn": "劫財", "base": "" },
+    "creative":      { "cn": "食神", "base": "" },
+    "expressive":    { "cn": "傷官", "base": "" },
+    "fortune":       { "cn": "偏財", "base": "" },
+    "steady_wealth": { "cn": "正財", "base": "" },
+    "challenge":     { "cn": "偏官", "base": "" },
+    "authority":     { "cn": "正官", "base": "" },
+    "insight":       { "cn": "偏印", "base": "" },
+    "wisdom":        { "cn": "印綬", "base": "" }
+  }
+}

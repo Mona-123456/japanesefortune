@@ -1,0 +1,8 @@
+{
+  "_comment": "無料の星teaser（1行）。源: クロちゃん10本納品予定（spec §6）。未納品の間は空 → synthesis.teaserFor() が『X Star (漢字)』ラベルにフォールバック。client配信可（1行のみ・有料本文は含めない）。キーは TEN_GODS。",
+  "version": "0.1-scaffold",
+  "teasers": {
+    "peer": "", "rival": "", "creative": "", "expressive": "", "fortune": "",
+    "steady_wealth": "", "challenge": "", "authority": "", "insight": "", "wisdom": ""
+  }
+}
