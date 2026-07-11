@@ -43,7 +43,7 @@
   --el-earth: #D3A24A;  /* 土 */
   --el-metal: #CFCABD;  /* 金 */
   --el-water: #4C74AE;  /* 水 */
-  /* Back-compat aliases → canonical (existing .el-fg--*/.el-bg--*/.el--* keep working). */
+  /* Back-compat aliases → canonical (existing el-fg--, el-bg--, el-- classes keep working). */
   --c-element-wood:  var(--el-wood);
   --c-element-fire:  var(--el-fire);
   --c-element-earth: var(--el-earth);
