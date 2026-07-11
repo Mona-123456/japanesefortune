@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/assets/css/tokens.css" />
   <link rel="stylesheet" href="/assets/css/base.css" />
   <link rel="stylesheet" href="/assets/css/hero.css" />
+  <link rel="stylesheet" href="/assets/css/daily.css" />
 
   <!-- Search Console: verify the whole domain with a DNS TXT record (recommended),
        or uncomment and paste the HTML-tag token: -->
@@ -84,6 +85,9 @@
       </div>
     </section>
 
+    <!-- Today's Fortune widget (deterministic daily; filled by daily-widget.js) -->
+    <section class="section section--tight" id="today-fortune" aria-label="Today's Fortune"></section>
+
     <hr class="rule-mon" />
 
     <!-- Articles hub (populated in Day 3 from content/) -->
@@ -131,5 +135,8 @@
       <small>&copy; 2026 Japanese Fortune &middot; japanesefortune.com</small>
     </div>
   </footer>
+
+  <!-- Today's Fortune widget (deterministic daily; client-only birthdate) -->
+  <script type="module" src="/assets/js/reading/daily-widget.js"></script>
 </body>
 </html>

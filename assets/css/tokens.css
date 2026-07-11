@@ -35,12 +35,20 @@
   --c-washi-400: #948877;  /* キャプション・補助 */
   --c-washi-500: #6b6154;  /* 最も弱いテキスト・プレースホルダ */
 
-  /* --- Five Elements 五行 (rendering accents for readings) --------------- */
-  --c-element-wood:  #4f8a5b;  /* 木 */
-  --c-element-fire:  #cf4b2c;  /* 火 */
-  --c-element-earth: #b48a4a;  /* 土 */
-  --c-element-metal: #c9c3b6;  /* 金 */
-  --c-element-water: #3f6f9a;  /* 水 */
+  /* --- Five Elements 五行 (rendering accents) ---------------------------- */
+  /* Canonical palette. Single source of truth — used by the daily widget,
+     five-element bars/chips, pillars and Day Master. */
+  --el-wood:  #5DBB8F;  /* 木 */
+  --el-fire:  #E2503A;  /* 火 */
+  --el-earth: #D3A24A;  /* 土 */
+  --el-metal: #CFCABD;  /* 金 */
+  --el-water: #4C74AE;  /* 水 */
+  /* Back-compat aliases → canonical (existing .el-fg--*/.el-bg--*/.el--* keep working). */
+  --c-element-wood:  var(--el-wood);
+  --c-element-fire:  var(--el-fire);
+  --c-element-earth: var(--el-earth);
+  --c-element-metal: var(--el-metal);
+  --c-element-water: var(--el-water);
 
   /* --- Semantic aliases -------------------------------------------------- */
   --color-bg:            var(--c-sumi-800);

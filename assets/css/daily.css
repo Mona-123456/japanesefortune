@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Daily fortune (日運) — homepage "Today's Fortune" widget + the reading
+   result page's "Today for You" card. Built entirely on tokens.css.
+   --------------------------------------------------------------------------
+   Each surface sets its own accent inline: style="--accent: var(--el-<todays
+   element>)". That single custom property drives the dot, the head rule and
+   the closing line, so the card is tinted by today's five-element energy.
+   ========================================================================== */
+
+/* --- shared: the tinted card shell --------------------------------------- */
+.daily,
+.today-card {
+  --accent: var(--color-gold); /* fallback until the JS sets today's element */
+  position: relative;
+  overflow: hidden;
+}
+/* A thin accent seam along the top edge, clipped to the card's radius. */
+.daily::before,
+.today-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--accent), color-mix(in srgb, var(--accent) 25%, transparent));
+}
+
+/* --- shared: head (kicker/heading + element chip) ------------------------ */
+.daily__head,
+.today-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.daily__head .kicker,
+.today-card__head h3 { margin-bottom: var(--space-2); }
+
+/* --- shared: element chip ("Wood 木") ------------------------------------ */
+.daily__chip,
+.today-card__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--color-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.daily__dot,
+.today-card__dot {
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.daily__chip .daily__chip-cn,
+.today-card__chip-cn { color: var(--color-text-faint); text-transform: none; }
+
+/* --- shared: date sub-line ----------------------------------------------- */
+.daily__date,
+.today-card__date {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--color-text-faint);
+  letter-spacing: var(--tracking-wide);
+  margin: 0 0 var(--space-4);
+}
+
+/* --- shared: body + closing ---------------------------------------------- */
+.daily__body,
+.today-card__body { color: var(--color-text); }
+.daily__closing,
+.today-card__closing {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  border-top: 1px dashed var(--color-border);
+  padding-top: var(--space-4);
+}
+
+/* ==========================================================================
+   Homepage widget only (#today-fortune → .daily)
+   ========================================================================== */
+.daily { margin-block: var(--space-2); }
+
+/* The "Today for you — your Yang Wood Day Master" strip above the personal read */
+.daily__personal-label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-2);
+}
+/* General-view call to action ("Add your birth date to…") */
+.daily__cta { color: var(--color-text-muted); font-size: var(--fs-sm); }
+
+/* Birth-date entry form */
+.daily__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: var(--border-hairline);
+}
+.daily__field { display: flex; flex-direction: column; gap: var(--space-2); }
+.daily__field input { width: 100%; }
+.daily__form .btn { align-self: flex-start; }
+.daily__note { font-size: var(--fs-xs); color: var(--color-text-faint); margin: 0; }
+.daily__err { font-size: var(--fs-sm); color: var(--color-link); margin: 0; }
+
+/* "Use a different birth date" — quiet text button */
+.daily__reset {
+  align-self: flex-start;
+  margin-top: var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  background: none;
+  border: 0;
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.daily__reset:hover { color: var(--color-text-strong); }
+
+/* ==========================================================================
+   Reading result page only (.today-card)
+   ========================================================================== */
+.today-card { margin-top: var(--space-6); }
+
+/* --- small phones: tighten the card so nothing overflows at 320px -------- */
+@media (max-width: 26rem) {
+  .daily,
+  .today-card { padding: var(--space-5); }
+  .daily__form .btn,
+  .daily__reset { align-self: stretch; }
+  .daily__form .btn { text-align: center; }
+}

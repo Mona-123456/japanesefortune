@@ -5,9 +5,10 @@
    balance, reading text, share, email CTA, related guides).
    ========================================================================== */
 
-import { computeChart, CITIES, cityById } from "../fourpillars/index.js";
+import { computeChart, CITIES, cityById, todayPillar } from "../fourpillars/index.js";
 import { ELEMENTS, ELEMENT_LABELS } from "../fourpillars/constants.js";
 import { composeReading } from "./compose.js";
+import { composeDailyReading } from "./compose-daily.js";
 
 const form = document.getElementById("reading-form");
 const resultEl = document.getElementById("reading-result");
@@ -42,6 +43,15 @@ async function loadReadings() {
   if (!res.ok) throw new Error(`Could not load readings (${res.status})`);
   readingsCache = await res.json();
   return readingsCache;
+}
+
+let dailyCache = null;
+async function loadDaily() {
+  if (dailyCache) return dailyCache;
+  const res = await fetch("/data/readings-daily.json", { cache: "no-cache" });
+  if (!res.ok) throw new Error(`Could not load daily (${res.status})`);
+  dailyCache = await res.json();
+  return dailyCache;
 }
 
 /* --- form → chart --------------------------------------------------------- */
@@ -173,7 +183,43 @@ function balanceBars(counts) {
   }).join("");
 }
 
-function renderResult(chart, reading) {
+// "Today for You" — the personal daily (personal[Day Master × today's element] +
+// daily_closing), a timely note appended to the permanent reading. Reuses the
+// daily engine/templates; a bonus block, so any failure just omits it.
+function todayForYouCard(chart, dailyData) {
+  if (!dailyData) return "";
+  try {
+    const today = todayPillar();
+    // No name field on the reading form yet; composeDailyReading resolves the
+    // empty {name} to a clean line. Pass `name` here when a field is added.
+    const daily = composeDailyReading({
+      today,
+      dayMasterStemKey: chart.dayMaster.stem.key,
+      data: dailyData,
+    });
+    const [, personal, closing] = daily.paragraphs; // drop the general (everyone) line
+    const el = today.stem.element;
+    const elLabel = ELEMENT_LABELS[el];
+    const polarity = today.stem.yin ? "Yin" : "Yang";
+    const dateLine = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+    return `
+    <div class="card today-card" style="--accent: var(--el-${el})">
+      <div class="today-card__head">
+        <h3>Today for You</h3>
+        <span class="today-card__chip"><span class="today-card__dot"></span>${elLabel.en} <span class="today-card__chip-cn">${elLabel.cn}</span></span>
+      </div>
+      <p class="today-card__date">${escapeHtml(`${dateLine} · ${polarity} ${elLabel.en} (${today.stem.cn}) day`)}</p>
+      <div class="today-card__body prose">
+        <p>${mdInline(personal)}</p>
+        <p class="today-card__closing">${mdInline(closing)}</p>
+      </div>
+    </div>`;
+  } catch {
+    return ""; // missing template / bad data — omit the block, keep the reading intact
+  }
+}
+
+function renderResult(chart, reading, dailyData) {
   const dm = chart.dayMaster;
   const dmElLabel = ELEMENT_LABELS[dm.element];
   const bodyHtml = reading.paragraphs
@@ -213,6 +259,8 @@ function renderResult(chart, reading) {
       ${bodyHtml}
       <p class="reading-disclaimer"><em>${escapeHtml(reading.disclaimer)}</em></p>
     </article>
+
+    ${todayForYouCard(chart, dailyData)}
 
     <div class="share-row">
       <a class="btn" id="share-x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}" target="_blank" rel="noopener">Share on X</a>
@@ -286,9 +334,13 @@ form?.addEventListener("submit", async (e) => {
   if (error) return renderError(error);
 
   try {
-    const [readings, chart] = await Promise.all([loadReadings(), Promise.resolve(computeChart(input))]);
+    const [readings, daily, chart] = await Promise.all([
+      loadReadings(),
+      loadDaily().catch(() => null), // daily is a bonus — never block the core reading
+      Promise.resolve(computeChart(input)),
+    ]);
     const reading = composeReading(chart, readings);
-    renderResult(chart, reading);
+    renderResult(chart, reading, daily);
   } catch (err) {
     renderError(`Something went wrong generating your reading. ${err.message}`);
     // eslint-disable-next-line no-console

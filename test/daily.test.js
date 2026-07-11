@@ -144,10 +144,11 @@ test("personal reading = general + personal + daily_closing, with relation repor
   assert.doesNotMatch(r.paragraphs[1], /\{name\}/);
 });
 
-test("{name} falls back to 'you' when no name is given", () => {
+test("{name} is dropped cleanly (with its comma) when no name is given", () => {
   const r = composeDailyReading({ today: dayPillarOf(2019, 1, 27), dayMasterStemKey: "jia", data: daily });
-  assert.match(r.paragraphs[1], /\byou\b/);
-  assert.doesNotMatch(r.paragraphs[1], /\{name\}/);
+  assert.doesNotMatch(r.paragraphs[1], /\{name\}/); // placeholder resolved
+  assert.doesNotMatch(r.paragraphs[1], /,\s*—/);    // no comma left dangling before the em-dash
+  assert.match(r.paragraphs[1], /your own — /);     // reads naturally: "…your own — Yang Wood…"
 });
 
 test("every Day-Master × every day-stem composes and resolves keys", () => {

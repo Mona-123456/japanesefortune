@@ -36,8 +36,12 @@ export function personalKeyFor(dayMasterStemKey, dayPillar) {
 }
 
 function interpolate(text, name) {
-  const who = (name && String(name).trim()) || "you";
-  return text.replaceAll("{name}", who);
+  const who = name && String(name).trim();
+  if (who) return text.replaceAll("{name}", who);
+  // No name on file: drop the direct-address insert together with the comma
+  // (or other punctuation) that introduced it, so the line still reads naturally.
+  //   "…your Wood, {name} — the axe…"  →  "…your Wood — the axe…"
+  return text.replace(/\s*[,;:]?\s*\{name\}/g, "");
 }
 
 const has = (o, k) => !!o && Object.prototype.hasOwnProperty.call(o, k);
