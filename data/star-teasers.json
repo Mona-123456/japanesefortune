@@ -1,8 +1,16 @@
 {
-  "_comment": "無料の星teaser（1行）。源: クロちゃん10本納品予定（spec §6）。未納品の間は空 → synthesis.teaserFor() が『X Star (漢字)』ラベルにフォールバック。client配信可（1行のみ・有料本文は含めない）。キーは TEN_GODS。",
-  "version": "0.1-scaffold",
+  "_comment": "無料の星teaser（1行）。源: クロちゃん10本納品済み（spec §6）。星名『The X Star (漢字)』はUI側でグロス生成し、ここにはコロン以降の1行のみ格納。client配信可（1行のみ・有料本文は含めない）。キーは TEN_GODS。",
+  "version": "1.0",
   "teasers": {
-    "peer": "", "rival": "", "creative": "", "expressive": "", "fortune": "",
-    "steady_wealth": "", "challenge": "", "authority": "", "insight": "", "wisdom": ""
+    "peer": "the note of pure selfhood — independence, self-reliance, and a mind of your own.",
+    "rival": "selfhood with drive — boldness, competition, and the nerve to reach first.",
+    "creative": "the easy exhale — natural talent, enjoyment, and unforced making.",
+    "expressive": "talent with an edge — brilliance, originality, and the refusal to blend in.",
+    "fortune": "the reach for the world — opportunity, generosity, and an eye for where value moves.",
+    "steady_wealth": "the patient hand — diligence, reliability, and building that lasts.",
+    "challenge": "the forge — courage under pressure and strength earned by overcoming.",
+    "authority": "order made lawful — responsibility, dignity, and respect that's earned.",
+    "insight": "the sideways mind — intuition, quick learning, and unconventional wisdom.",
+    "wisdom": "the nourishing source — learning, kindness, and steady, well-taught wisdom."
   }
 }

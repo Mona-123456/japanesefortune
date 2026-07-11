@@ -139,11 +139,109 @@
    ========================================================================== */
 .today-card { margin-top: var(--space-6); }
 
+/* ==========================================================================
+   Reading result page — "Your Stars" (十神) lineup + body-strength badge.
+   Free hook for the paid reading: each prominent ten-god named and teased.
+   Tinted by the Day Master's element via --accent (set inline, --el-*).
+   ========================================================================== */
+.stars-card {
+  --accent: var(--color-gold); /* fallback until JS sets the Day Master element */
+  margin-top: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+.stars-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--accent), color-mix(in srgb, var(--accent) 25%, transparent));
+}
+.stars-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.stars-card__head h3 { margin-bottom: var(--space-4); }
+.stars-card__cn { color: var(--color-text-faint); font-weight: 400; }
+
+/* Body-strength badge — reuses the daily chip's pill treatment. */
+.strength-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--color-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.strength-badge__dot {
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.strength-badge__cn { color: var(--color-text-faint); text-transform: none; }
+
+/* Star list */
+.stars { list-style: none; margin: 0; padding: 0; }
+.star {
+  padding: var(--space-4) 0;
+  border-top: 1px dashed var(--color-border);
+}
+.star:first-child { border-top: 0; padding-top: 0; }
+.star__name {
+  font-family: var(--font-serif, var(--font-sans));
+  font-size: var(--fs-lg);
+  color: var(--color-text-strong);
+  margin: 0 0 var(--space-2);
+}
+.star__cn { color: var(--accent); font-size: 0.85em; margin-left: var(--space-1); }
+.star__theme {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-left: var(--space-2);
+  white-space: nowrap;
+}
+.star__teaser { color: var(--color-text); margin: 0 0 var(--space-3); }
+
+/* Placeholder CTA — visual only; gated (課金はゲート後). No live href yet. */
+.star__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+.star__cta:hover { color: var(--color-text-muted); }
+
 /* --- small phones: tighten the card so nothing overflows at 320px -------- */
 @media (max-width: 26rem) {
   .daily,
-  .today-card { padding: var(--space-5); }
+  .today-card,
+  .stars-card { padding: var(--space-5); }
   .daily__form .btn,
   .daily__reset { align-self: stretch; }
   .daily__form .btn { text-align: center; }
+  .stars-card__head { gap: var(--space-2); }
+  .star__name { font-size: var(--fs-base); }
+  .star__theme { display: block; margin-left: 0; margin-top: var(--space-1); }
 }

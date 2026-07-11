@@ -86,7 +86,7 @@ test("buildFreeReading: 命式 + star lineup(name+1line) + 五行 + 年運 + 日
   assert.equal(free.starLineup.length, 3);
   assert.equal(free.starLineup[0].position, "month");
   assert.equal(free.starLineup[0].cn, "偏財");
-  assert.ok(free.starLineup[0].teaser.length > 0);            // teaser fallback works on empty scaffold
+  assert.ok(free.starLineup[0].teaser.length > 0);            // teaser resolves (shipped manuscript, else label)
   assert.equal(free.fiveElements.counts.wood > 0, true);
   assert.equal(typeof free.yearOutlook, "string");           // 年運 from readings.json
   assert.ok(free.daily && Array.isArray(free.daily.paragraphs)); // 日運
@@ -94,7 +94,9 @@ test("buildFreeReading: 命式 + star lineup(name+1line) + 五行 + 年運 + 日
 });
 
 test("teaserFor: explicit teaser, else a labelled fallback", () => {
-  assert.equal(teaserFor("fortune", TEASERS), "偏財 Star"); // scaffold empty → label
+  assert.equal(teaserFor("fortune", TEASERS), TEASERS.teasers.fortune);         // shipped manuscript passes through
+  assert.ok(TEASERS.teasers.fortune.length > 0);                               // manuscript landed (no longer empty scaffold)
+  assert.equal(teaserFor("fortune", { teasers: { fortune: "" } }), "偏財 Star"); // empty → labelled fallback
   assert.equal(teaserFor("fortune", { teasers: { fortune: "One clear line." } }), "One clear line.");
 });
 

@@ -6,9 +6,11 @@
    ========================================================================== */
 
 import { computeChart, CITIES, cityById, todayPillar } from "../fourpillars/index.js";
+import { tenGodsOf, strengthOf } from "../fourpillars/index.js";
 import { ELEMENTS, ELEMENT_LABELS } from "../fourpillars/constants.js";
 import { composeReading } from "./compose.js";
 import { composeDailyReading } from "./compose-daily.js";
+import { selectProminentStars, teaserFor } from "./synthesis.js";
 
 const form = document.getElementById("reading-form");
 const resultEl = document.getElementById("reading-result");
@@ -52,6 +54,24 @@ async function loadDaily() {
   if (!res.ok) throw new Error(`Could not load daily (${res.status})`);
   dailyCache = await res.json();
   return dailyCache;
+}
+
+let hiddenCache = null;
+async function loadHidden() {
+  if (hiddenCache) return hiddenCache;
+  const res = await fetch("/data/hidden-stems.json", { cache: "no-cache" });
+  if (!res.ok) throw new Error(`Could not load hidden stems (${res.status})`);
+  hiddenCache = await res.json();
+  return hiddenCache;
+}
+
+let teasersCache = null;
+async function loadTeasers() {
+  if (teasersCache) return teasersCache;
+  const res = await fetch("/data/star-teasers.json", { cache: "no-cache" });
+  if (!res.ok) throw new Error(`Could not load teasers (${res.status})`);
+  teasersCache = await res.json();
+  return teasersCache;
 }
 
 /* --- form → chart --------------------------------------------------------- */
@@ -219,7 +239,65 @@ function todayForYouCard(chart, dailyData) {
   }
 }
 
-function renderResult(chart, reading, dailyData) {
+// English gloss names for the ten gods, paired with the kanji from the engine
+// (TEN_GOD_LABELS via selectProminentStars). Displayed as "The X Star (漢字)".
+const STAR_NAMES_EN = {
+  peer: "Peer", rival: "Rival", creative: "Creative", expressive: "Expressive",
+  fortune: "Fortune", steady_wealth: "Steady-Wealth", challenge: "Challenge",
+  authority: "Authority", insight: "Insight", wisdom: "Wisdom",
+};
+
+// Body-strength badge: engine label → display (English + kanji).
+const STRENGTH_LABELS = {
+  robust: { en: "Robust", cn: "身旺" },
+  balanced: { en: "Balanced", cn: "中和" },
+  weak: { en: "Weak", cn: "身弱" },
+};
+
+// "Your Stars" — the free ten-god lineup: the prominent stars named and
+// teased (one line each), plus the body-strength badge. Foregrounds month-stem
+// first, folds hidden stems (selectProminentStars default). Teasers are the
+// free hook; the full interpretation is the gated paid reading. A bonus block —
+// any failure (missing tables) just omits it, leaving the core reading intact.
+function yourStarsCard(chart, hiddenTable, teasers) {
+  if (!hiddenTable) return "";
+  try {
+    const tenGods = tenGodsOf(chart, hiddenTable);
+    const stars = selectProminentStars(chart, tenGods, { max: 3 });
+    if (!stars.length) return "";
+
+    const strength = strengthOf(chart);
+    const sLabel = STRENGTH_LABELS[strength.label] ?? { en: cap(strength.label), cn: strength.cn };
+    const el = chart.dayMaster.element; // accent = Day Master's element (stars are relative to it)
+
+    const rows = stars.map((s) => {
+      const t = teaserFor(s.god, teasers);
+      // teaserFor returns "<kanji> Star" when the manuscript line is missing —
+      // treat that as "no teaser yet" and skip the line rather than echo a label.
+      const hasTeaser = t && t !== `${s.cn} Star`;
+      const enName = STAR_NAMES_EN[s.god] ?? cap(s.god);
+      return `
+      <li class="star">
+        <p class="star__name">The ${escapeHtml(enName)} Star <span class="star__cn">${s.cn}</span>${s.isTheme ? ` <span class="star__theme">recurring theme</span>` : ""}</p>
+        ${hasTeaser ? `<p class="star__teaser">${mdInline(t)}</p>` : ""}
+        <a class="star__cta" href="#" role="button" aria-disabled="true" tabindex="-1">Unlock full reading <span aria-hidden="true">→</span></a>
+      </li>`;
+    }).join("");
+
+    return `
+    <div class="card stars-card" style="--accent: var(--el-${el})">
+      <div class="stars-card__head">
+        <h3>Your Stars <span class="stars-card__cn">十神</span></h3>
+        <span class="strength-badge" title="Body strength (身強身弱)"><span class="strength-badge__dot"></span>${sLabel.en} <span class="strength-badge__cn">${sLabel.cn}</span></span>
+      </div>
+      <ul class="stars">${rows}</ul>
+    </div>`;
+  } catch {
+    return ""; // missing table / bad data — omit the block, keep the reading intact
+  }
+}
+
+function renderResult(chart, reading, dailyData, hiddenTable, teasers) {
   const dm = chart.dayMaster;
   const dmElLabel = ELEMENT_LABELS[dm.element];
   const bodyHtml = reading.paragraphs
@@ -254,6 +332,8 @@ function renderResult(chart, reading, dailyData) {
         ? `<p class="balance-note">Traditionally read as light in ${chart.balance.lacking.map((e) => ELEMENT_LABELS[e].en).join(", ")}.</p>`
         : ""}
     </div>
+
+    ${yourStarsCard(chart, hiddenTable, teasers)}
 
     <article class="reading-body prose">
       ${bodyHtml}
@@ -334,13 +414,15 @@ form?.addEventListener("submit", async (e) => {
   if (error) return renderError(error);
 
   try {
-    const [readings, daily, chart] = await Promise.all([
+    const [readings, daily, hidden, teasers, chart] = await Promise.all([
       loadReadings(),
-      loadDaily().catch(() => null), // daily is a bonus — never block the core reading
+      loadDaily().catch(() => null),    // daily is a bonus — never block the core reading
+      loadHidden().catch(() => null),   // hidden stems: needed for the star lineup (bonus)
+      loadTeasers().catch(() => null),  // star teasers (bonus)
       Promise.resolve(computeChart(input)),
     ]);
     const reading = composeReading(chart, readings);
-    renderResult(chart, reading, daily);
+    renderResult(chart, reading, daily, hidden, teasers);
   } catch (err) {
     renderError(`Something went wrong generating your reading. ${err.message}`);
     // eslint-disable-next-line no-console
