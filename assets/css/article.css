@@ -52,6 +52,17 @@
 .article-body li { margin-bottom: var(--space-2); }
 .article-body a { text-decoration: underline; text-underline-offset: 2px; }
 .article-body strong { color: var(--color-text-strong); }
+/* Epigraph / pull quote — left accent rule, larger lead; wraps at any width. */
+.article-body blockquote {
+  margin: 0 0 var(--space-6);
+  padding-left: var(--space-5);
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-strong);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+}
+.article-body blockquote p { margin-block: 0 var(--space-3); max-width: none; }
+.article-body blockquote p:last-child { margin-bottom: 0; }
 
 /* FAQ */
 .faq { margin-top: var(--space-8); }
