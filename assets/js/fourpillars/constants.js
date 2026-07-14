@@ -73,5 +73,20 @@ export const MONTH_TERMS = [
   { term: "小寒", en: "Shōkan",    longitude: 285, branch: 1  }, // 丑
 ];
 
+/**
+ * English glosses for the 24 solar terms (二十四節気), keyed by kanji. House
+ * style: English is primary, kanji is decoration — any specialist term gets an
+ * English gloss. Displayed as "Major Snow (大雪)". Covers all 24 (the 12 節
+ * month-openers in MONTH_TERMS plus the 12 中氣) so any term resolves.
+ */
+export const SOLAR_TERM_GLOSS = {
+  立春: "Start of Spring",  雨水: "Rain Water",       啓蟄: "Awakening of Insects", 春分: "Spring Equinox",
+  清明: "Pure Brightness",  穀雨: "Grain Rain",       立夏: "Start of Summer",      小満: "Grain Full",
+  芒種: "Grain in Ear",     夏至: "Summer Solstice",  小暑: "Minor Heat",           大暑: "Major Heat",
+  立秋: "Start of Autumn",  処暑: "End of Heat",       白露: "White Dew",            秋分: "Autumn Equinox",
+  寒露: "Cold Dew",         霜降: "Frost Descent",     立冬: "Start of Winter",      小雪: "Minor Snow",
+  大雪: "Major Snow",       冬至: "Winter Solstice",   小寒: "Minor Cold",           大寒: "Major Cold",
+};
+
 /** IANA offset for the birth-time interpretation. Phase 1 assumes Japan (JST). */
 export const TZ_OFFSET_HOURS = 9;

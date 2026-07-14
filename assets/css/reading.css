@@ -19,6 +19,13 @@
 .result-head h2 { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; }
 .dm-glyph { font-family: var(--font-display); font-size: 1.4em; }
 .result-sub { color: var(--color-text-muted); font-size: var(--fs-sm); }
+/* Day Master symbol (B-2): the drawn "card" at the top of the result. The PNG
+   is a glowing medallion on a black field — it sits on the page ground. */
+.dm-symbol { margin: var(--space-4) 0 var(--space-3); text-align: center; }
+.dm-symbol__img { width: 320px; max-width: 78%; height: auto; }
+.dm-detail { color: var(--color-text-muted); font-size: var(--fs-base); margin: var(--space-2) 0 0; }
+.dm-detail .dm-glyph { font-size: 1.25em; }
+.dm-line { font-size: var(--fs-lg); color: var(--color-text-strong); max-width: var(--measure); margin: var(--space-3) 0 0; }
 .corr-note {
   color: var(--color-gold);
   font-family: var(--font-sans);

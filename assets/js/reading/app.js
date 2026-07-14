@@ -7,7 +7,7 @@
 
 import { computeChart, CITIES, cityById, todayPillar } from "../fourpillars/index.js";
 import { tenGodsOf, strengthOf } from "../fourpillars/index.js";
-import { ELEMENTS, ELEMENT_LABELS } from "../fourpillars/constants.js";
+import { ELEMENTS, ELEMENT_LABELS, SOLAR_TERM_GLOSS } from "../fourpillars/constants.js";
 import { composeReading } from "./compose.js";
 import { composeDailyReading } from "./compose-daily.js";
 import { selectProminentStars, teaserFor } from "./synthesis.js";
@@ -254,6 +254,43 @@ const STRENGTH_LABELS = {
   weak: { en: "Weak", cn: "身弱" },
 };
 
+// Day Master (日主) symbol + the "you are ___" identity, keyed by stem. The
+// image name is the shareable headline; the line is the classical one-liner
+// (reused from the ten-types guide) — the "you drew this card" hook.
+const DM_IMAGE = {
+  jia: "the Tall Tree", yi: "the Vine", bing: "the Sun", ding: "the Candle",
+  wu: "the Mountain", ji: "the Field", geng: "the Axe", xin: "the Jewel",
+  ren: "the River", gui: "the Fog",
+};
+const DM_LINE = {
+  jia: "You are the tree others plan their lives around.",
+  yi: "You are the softest thing in the room, and the last one standing.",
+  bing: "You are the reason the room is warm. Someone should tell you to go home.",
+  ding: "You see people. It's not always comfortable for them.",
+  wu: "You are the mountain others shelter against. Notice who is standing there.",
+  ji: "Everything growing around you is standing in you.",
+  geng: "You are the one they call when someone has to say it.",
+  xin: "You notice the flaw. Try not to point it at yourself.",
+  ren: "You don't push through walls. You outlast them.",
+  gui: "No one saw you coming. That was never an accident.",
+};
+
+// The Day Master's stem symbol — the eye-catching "card" at the top of the
+// result. Eager (above the fold). A missing/unmapped stem just omits the image.
+function dmSymbolFigure(dm) {
+  const key = dm.stem?.key;
+  if (!key || !DM_IMAGE[key]) return "";
+  const alt = `${cap(dm.polarity)} ${cap(dm.element)} — ${DM_IMAGE[key].replace(/^the /, "The ")}`;
+  return `
+      <figure class="dm-symbol">
+        <picture>
+          <source type="image/avif" srcset="/assets/img/stem-${key}-320.avif 320w, /assets/img/stem-${key}-640.avif 640w" sizes="(max-width: 26rem) 78vw, 320px" />
+          <source type="image/webp" srcset="/assets/img/stem-${key}-320.webp 320w, /assets/img/stem-${key}-640.webp 640w" sizes="(max-width: 26rem) 78vw, 320px" />
+          <img class="dm-symbol__img" src="/assets/img/stem-${key}.png" width="320" height="320" alt="${escapeHtml(alt)}" decoding="async" />
+        </picture>
+      </figure>`;
+}
+
 // "Your Stars" — the free ten-god lineup: the prominent stars named and
 // teased (one line each), plus the body-strength badge. Foregrounds month-stem
 // first, folds hidden stems (selectProminentStars default). Teasers are the
@@ -304,17 +341,25 @@ function renderResult(chart, reading, dailyData, hiddenTable, teasers) {
     .map((p) => `<p>${mdInline(p)}</p>`)
     .join("");
 
-  const shareText =
-    `My Japanese Four Pillars Day Master is ${dm.cn} (${cap(dm.polarity)} ${cap(dm.element)}). ` +
-    `Read yours free:`;
+  const dmName = DM_IMAGE[dm.stem?.key];   // e.g. "the Mountain"
+  const dmLine = DM_LINE[dm.stem?.key];
+  const termGloss = SOLAR_TERM_GLOSS[chart.monthTerm];
+  const termStr = termGloss ? `${termGloss} (${chart.monthTerm})` : chart.monthTerm;
+
+  const shareText = dmName
+    ? `I'm ${dmName} — ${cap(dm.polarity)} ${cap(dm.element)} (${dm.cn}). My Japanese Four Pillars Day Master. Read yours free:`
+    : `My Japanese Four Pillars Day Master is ${dm.cn} (${cap(dm.polarity)} ${cap(dm.element)}). Read yours free:`;
   const shareUrl = "https://japanesefortune.com/reading/";
 
   resultEl.innerHTML = `
     <hr class="rule-mon" />
     <div class="result-head">
-      <span class="kicker">Your Four Pillars · 四柱</span>
-      <h2>You are <span class="el-fg--${dm.element}">${cap(dm.polarity)} ${dmElLabel.en}</span> <span class="dm-glyph el-fg--${dm.element}">${dm.cn}</span></h2>
-      <p class="result-sub">${chart.hasTime ? "" : "Calculated without a birth time — the hour pillar is omitted, but your Day Master is unaffected. "}Born under the ${chart.monthTerm} solar term, solar year ${chart.solarYear}.</p>
+      <span class="kicker">Your Day Master · 日主</span>
+      ${dmSymbolFigure(dm)}
+      <h2>You are <span class="el-fg--${dm.element}">${dmName ? escapeHtml(dmName) : `${cap(dm.polarity)} ${dmElLabel.en}`}</span></h2>
+      <p class="dm-detail"><span class="dm-glyph el-fg--${dm.element}">${dm.cn}</span> · ${cap(dm.polarity)} ${dmElLabel.en}</p>
+      ${dmLine ? `<p class="dm-line"><em>${escapeHtml(dmLine)}</em></p>` : ""}
+      <p class="result-sub">${chart.hasTime ? "" : "Calculated without a birth time — the hour pillar is omitted, but your Day Master is unaffected. "}Born under the ${termStr} solar term, solar year ${chart.solarYear}.</p>
       ${chart.localCorrection ? `<p class="corr-note">Local time correction: <strong>${fmtCorr(chart.localCorrection.minutes)}</strong>${chart.localCorrection.place.name ? ` · ${escapeHtml(chart.localCorrection.place.name)}` : ""} <span class="corr-breakdown">(longitude ${fmtCorr(chart.localCorrection.longitudeMinutes)}, equation of time ${fmtCorr(chart.localCorrection.eotMinutes)})</span></p>` : ""}
     </div>
 
