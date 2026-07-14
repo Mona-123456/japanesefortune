@@ -16,6 +16,7 @@
    ========================================================================== */
 
 import { STEMS, BRANCHES, ELEMENTS, TZ_OFFSET_HOURS } from "./constants.js";
+import { SIXTY_KANSHI } from "./sixty-kanshi.js";
 import { julianDayNumberNoon, gregorianToJD, jdToGregorian } from "./astronomy.js";
 import { risshun, monthTermBoundaries } from "./solar-terms.js";
 import { localTimeCorrection } from "./localtime.js";
@@ -35,7 +36,10 @@ function pillarFromIndex(index60) {
     stem,
     branch,
     cn: stem.cn + branch.cn,
-    romaji: `${stem.romaji}-${branch.romaji}`,
+    // Traditional kun-yomi reading from the canonical 60-kanshi table (NAO).
+    // The old stem-onyomi + branch-kunyomi concat mixed readings and collided
+    // (甲/庚 both "Kō"); this is the single source of truth. Fallback is defensive.
+    romaji: SIXTY_KANSHI[stem.cn + branch.cn] ?? `${stem.romaji}-${branch.romaji}`,
     element: stem.element, // pillar's governing element = its stem's element
     yin: stem.yin,
   };
