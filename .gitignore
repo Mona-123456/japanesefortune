@@ -14,3 +14,7 @@ docs/phase2-synthesis-spec.md
 # Hero art masters (12–13MB each): archived locally in content/, not served.
 # Inputs to `npm run build:hero`; the committed derivatives in assets/img/ ship.
 content/hero-master-*.png
+
+# Heavenly-Stem symbol masters (~1.5MB each): archived locally in content/.
+# Inputs to `npm run build:symbols`; the committed stem-* derivatives ship.
+content/10_symbols_*.png

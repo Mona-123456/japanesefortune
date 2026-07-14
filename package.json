@@ -9,7 +9,8 @@
     "build:articles": "node tools/build-articles.mjs",
     "build:og": "node tools/build-og-images.mjs",
     "build:hero": "node tools/build-hero-images.mjs",
-    "build": "npm run build:articles && npm run build:og && npm run build:hero",
+    "build:symbols": "node tools/build-symbol-images.mjs",
+    "build": "npm run build:articles && npm run build:og && npm run build:hero && npm run build:symbols",
     "serve": "python -m http.server 8080"
   },
   "engines": {
