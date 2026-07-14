@@ -26,6 +26,7 @@
 .dm-detail { color: var(--color-text-muted); font-size: var(--fs-base); margin: var(--space-2) 0 0; }
 .dm-detail .dm-glyph { font-size: 1.25em; }
 .dm-line { font-size: var(--fs-lg); color: var(--color-text-strong); max-width: var(--measure); margin: var(--space-3) 0 0; }
+.dm-cta { margin: var(--space-4) 0 0; }
 .corr-note {
   color: var(--color-gold);
   font-family: var(--font-sans);

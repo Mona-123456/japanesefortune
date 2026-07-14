@@ -68,6 +68,26 @@
    they sit directly on it (no card behind them). */
 .article-body .stem-figure { margin: 0 0 var(--space-4); text-align: center; }
 .article-body .stem-img { width: 200px; max-width: 55%; height: auto; }
+/* Day Master pages only: the H1 carries a long fixed suffix ("… — Your Day
+   Master"), so it's sized down to land in ~2 lines on desktop (article H1s are
+   untouched). Narrow screens wrap to 3–4 lines, which is fine. */
+.article-head h1.dm-page-title {
+  font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl));
+  line-height: var(--lh-tight);
+}
+/* Day Master page hero: the large stem symbol + one-line identity. The medallion
+   is a glow on a black field, so it sits on the page ground (never a light card,
+   which would show the black square). */
+.dm-hero { margin: var(--space-5) 0 var(--space-3); text-align: center; }
+.dm-hero__img { width: 360px; max-width: 80%; height: auto; }
+.dm-hero-line {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  color: var(--color-text-strong);
+  text-align: center;
+  max-width: none;
+  margin: 0 0 var(--space-6);
+}
 
 /* FAQ */
 .faq { margin-top: var(--space-8); }

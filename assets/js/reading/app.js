@@ -263,13 +263,13 @@ const DM_IMAGE = {
   ren: "the River", gui: "the Fog",
 };
 const DM_LINE = {
-  jia: "You are the tree others plan their lives around.",
-  yi: "You are the softest thing in the room, and the last one standing.",
+  jia: "You are the tree others plan their lives around. They rarely say so.",
+  yi: "You are the softest thing in the room. You are also the last one standing.",
   bing: "You are the reason the room is warm. Someone should tell you to go home.",
   ding: "You see people. It's not always comfortable for them.",
   wu: "You are the mountain others shelter against. Notice who is standing there.",
-  ji: "Everything growing around you is standing in you.",
-  geng: "You are the one they call when someone has to say it.",
+  ji: "Everything growing around you is standing in you. Look at what you've grown.",
+  geng: "You are the one they call when someone has to say it. They will call you again.",
   xin: "You notice the flaw. Try not to point it at yourself.",
   ren: "You don't push through walls. You outlast them.",
   gui: "No one saw you coming. That was never an accident.",
@@ -359,6 +359,7 @@ function renderResult(chart, reading, dailyData, hiddenTable, teasers) {
       <h2>You are <span class="el-fg--${dm.element}">${dmName ? escapeHtml(dmName) : `${cap(dm.polarity)} ${dmElLabel.en}`}</span></h2>
       <p class="dm-detail"><span class="dm-glyph el-fg--${dm.element}">${dm.cn}</span> · ${cap(dm.polarity)} ${dmElLabel.en}</p>
       ${dmLine ? `<p class="dm-line"><em>${escapeHtml(dmLine)}</em></p>` : ""}
+      ${dmName ? `<p class="dm-cta"><a class="btn btn--ghost" href="/day-master/${dm.polarity}-${dm.element}/">Read more about ${escapeHtml(dmName)} →</a></p>` : ""}
       <p class="result-sub">${chart.hasTime ? "" : "Calculated without a birth time — the hour pillar is omitted, but your Day Master is unaffected. "}Born under the ${termStr} solar term, solar year ${chart.solarYear}.</p>
       ${chart.localCorrection ? `<p class="corr-note">Local time correction: <strong>${fmtCorr(chart.localCorrection.minutes)}</strong>${chart.localCorrection.place.name ? ` · ${escapeHtml(chart.localCorrection.place.name)}` : ""} <span class="corr-breakdown">(longitude ${fmtCorr(chart.localCorrection.longitudeMinutes)}, equation of time ${fmtCorr(chart.localCorrection.eotMinutes)})</span></p>` : ""}
     </div>
