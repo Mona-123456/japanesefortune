@@ -18,3 +18,7 @@ content/hero-master-*.png
 # Heavenly-Stem symbol masters (~1.5MB each): archived locally in content/.
 # Inputs to `npm run build:symbols`; the committed stem-* derivatives ship.
 content/10_symbols_*.png
+
+# Zodiac (Earthly Branch) masters (j01–j13, ~2MB each): archived locally in content/.
+# Inputs to `npm run build:zodiac`; the committed zodiac-* derivatives ship.
+content/j??.png
