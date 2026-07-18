@@ -88,6 +88,21 @@
   max-width: none;
   margin: 0 0 var(--space-6);
 }
+/* Zodiac calendar meta — one inline line (element/hour/direction/season). Plain
+   text with middot separators so it wraps cleanly at 320px (no table). */
+.zodiac-meta {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0 0 var(--space-6);
+}
+.zodiac-meta strong { color: var(--color-text-strong); }
+/* Article-9 lead image: the 12-medallion grid (portrait), centred on the page
+   ground. Responsive; caps so the portrait doesn't dominate on desktop. */
+.zodiac-hero { margin: 0 0 var(--space-6); text-align: center; }
+.zodiac-hero img { width: 100%; max-width: 460px; height: auto; }
 
 /* FAQ */
 .faq { margin-top: var(--space-8); }
