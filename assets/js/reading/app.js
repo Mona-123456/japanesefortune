@@ -343,6 +343,10 @@ function renderResult(chart, reading, dailyData, hiddenTable, teasers) {
 
   const dmName = DM_IMAGE[dm.stem?.key];   // e.g. "the Mountain"
   const dmLine = DM_LINE[dm.stem?.key];
+  // Year animal → its zodiac page. The year branch is everyone's familiar
+  // "sign"; its English name is the /zodiac/<slug>/ key (Rat…Boar).
+  const yearAnimal = chart.pillars.year?.branch?.zodiac || null;
+  const yearSlug = yearAnimal ? yearAnimal.toLowerCase() : null;
   const termGloss = SOLAR_TERM_GLOSS[chart.monthTerm];
   const termStr = termGloss ? `${termGloss} (${chart.monthTerm})` : chart.monthTerm;
 
@@ -370,6 +374,11 @@ function renderResult(chart, reading, dailyData, hiddenTable, teasers) {
       ${pillarColumn("Day", chart.pillars.day, true)}
       ${pillarColumn("Hour", chart.pillars.hour, false)}
     </div>
+    ${yearSlug ? `<div class="zodiac-cta">
+      <span class="zodiac-cta__label">Your zodiac animal · 十二支</span>
+      <a class="btn btn--ghost" href="/zodiac/${yearSlug}/">The ${escapeHtml(yearAnimal)} (${chart.pillars.year.branch.cn}) →</a>
+      <a class="zodiac-cta__hub" href="/japanese-zodiac-animals/">Learn how all twelve work →</a>
+    </div>` : ""}
 
     <div class="card balance-card">
       <h3>Five-element balance · 五行</h3>

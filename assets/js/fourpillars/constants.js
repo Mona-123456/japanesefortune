@@ -36,7 +36,7 @@ export const BRANCHES = [
   { cn: "申", key: "shen", romaji: "Saru", zodiac: "Monkey",  element: "metal" },
   { cn: "酉", key: "you",  romaji: "Tori", zodiac: "Rooster", element: "metal" },
   { cn: "戌", key: "xu",   romaji: "Inu",  zodiac: "Dog",     element: "earth" },
-  { cn: "亥", key: "hai",  romaji: "I",    zodiac: "Pig",     element: "water" },
+  { cn: "亥", key: "hai",  romaji: "I",    zodiac: "Boar",    element: "water" },
 ];
 
 /** Five elements 五行, canonical order 木火土金水. */

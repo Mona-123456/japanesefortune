@@ -27,6 +27,27 @@
 .dm-detail .dm-glyph { font-size: 1.25em; }
 .dm-line { font-size: var(--fs-lg); color: var(--color-text-strong); max-width: var(--measure); margin: var(--space-3) 0 0; }
 .dm-cta { margin: var(--space-4) 0 0; }
+/* Year-animal CTA under the four-pillars grid: a small label, the primary
+   button → its /zodiac/<slug>/ page, and a quieter hub link → article 9. */
+.zodiac-cta { margin: var(--space-5) 0 0; text-align: center; }
+.zodiac-cta__label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-2);
+}
+/* Subordinate: a plain muted text link, smaller than the button. */
+.zodiac-cta__hub {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+.zodiac-cta__hub:hover { color: var(--color-text-strong); }
 .corr-note {
   color: var(--color-gold);
   font-family: var(--font-sans);
