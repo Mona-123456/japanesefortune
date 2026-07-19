@@ -48,6 +48,9 @@
   color: var(--color-text-muted);
 }
 .zodiac-cta__hub:hover { color: var(--color-text-strong); }
+/* Static explainer + FAQ below the tool (uses article.css prose/faq styles).
+   Extra top space sets it apart from the form / rendered result above it. */
+.reading-about { margin-top: var(--space-8); }
 .corr-note {
   color: var(--color-gold);
   font-family: var(--font-sans);

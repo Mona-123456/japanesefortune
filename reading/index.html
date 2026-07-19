@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Four Pillars Reading — Japanese Fortune</title>
-  <meta name="description" content="Enter your birth date for a free Four Pillars of Destiny (BaZi) reading: your Day Master, five-element balance, and 2026 outlook. Calculated in your browser." />
+  <meta name="description" content="Enter your birth date for a free Four Pillars of Destiny (BaZi) reading: your Day Master, five-element balance, and how the current year is traditionally read for your element. Calculated in your browser." />
   <link rel="canonical" href="https://japanesefortune.com/reading/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Japanese Fortune" />
   <meta property="og:title" content="Free Four Pillars Reading — Japanese Fortune" />
-  <meta property="og:description" content="Your Day Master, five-element balance, and 2026 outlook — a free Four Pillars (BaZi) reading." />
+  <meta property="og:description" content="Your Day Master, five-element balance, and how the current year is traditionally read for your element — a free Four Pillars (BaZi) reading." />
   <meta property="og:url" content="https://japanesefortune.com/reading/" />
   <meta property="og:image" content="https://japanesefortune.com/assets/img/og-reading.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -18,12 +18,82 @@
   <link rel="stylesheet" href="/assets/css/tokens.css" />
   <link rel="stylesheet" href="/assets/css/base.css" />
   <link rel="stylesheet" href="/assets/css/reading.css" />
+  <link rel="stylesheet" href="/assets/css/article.css" />
   <link rel="stylesheet" href="/assets/css/daily.css" />
 
   <!-- Search Console: verify the whole domain with a DNS TXT record (recommended),
        or uncomment and paste the HTML-tag token: -->
   <!-- <meta name="google-site-verification" content="PASTE_TOKEN_HERE" /> -->
   <script defer src="/assets/js/analytics.js"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Free Four Pillars Reading",
+      "url": "https://japanesefortune.com/reading/",
+      "description": "A free Four Pillars of Destiny (BaZi / Shichū Suimei) reading: your Day Master, five-element balance, and how the current year is traditionally read for your element. Calculated privately in your browser.",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web",
+      "browserRequirements": "Requires JavaScript",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Japanese Fortune",
+        "url": "https://japanesefortune.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://japanesefortune.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Free Reading" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need my exact birth time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Without a time, the hour pillar is omitted — but your Day Master, your five-element balance and three of your four animals are all calculated from the date alone. If you do know your birth time, the reading gains a fourth pillar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I was born in January or early February?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Then your chart may belong to the previous year. The traditional year begins at Risshun in early February, not on January 1st, and this reading uses the astronomical boundary rather than the calendar one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this Chinese BaZi or Japanese Shichū Suimei?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The same underlying system — it travelled from China to Japan over a thousand years ago and developed its own vocabulary and readings there. This site works in the Japanese tradition: Japanese stem and branch names, Japanese readings, and the Japanese folklore attached to each sign."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my birth data sent anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The entire calculation runs in your browser. Nothing about your birth date leaves your device, and we do not store it."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -106,8 +176,46 @@
           <button type="submit" class="btn">Reveal my Four Pillars</button>
         </form>
 
-        <!-- Result renders here (Day 2). -->
+        <!-- Result renders here (Day 2). Static explainer sits below, so after a
+             reading it reads "result → explainer"; before one, it's the page's
+             SEO body under the form. -->
         <section id="reading-result" hidden aria-live="polite"></section>
+
+        <div class="prose article-body reading-about">
+          <h2>What a Four Pillars reading tells you</h2>
+          <p>Four Pillars of Destiny — <strong>Shichū Suimei</strong> (四柱推命) in Japanese, BaZi in Chinese — reads your birth moment as eight classical characters. This free reading gives you three of the core layers.</p>
+          <p>Your <strong>Day Master</strong> is the heavenly stem of the day you were born: the elemental character the tradition reads as <em>you</em>. There are ten of them — <a href="/day-master/yang-wood/">the tall tree</a>, the vine, the sun, the candle, the mountain, the field, the axe, the jewel, the river, the fog. <a href="/ten-japanese-elemental-types/">Ten types →</a></p>
+          <p>Your <strong>five-element balance</strong> counts the Wood, Fire, Earth, Metal and Water across your whole chart. Some charts run hot, some run heavy, some are unusually even — and tradition reads each shape as both a gift and an assignment.</p>
+          <p>Your <strong>four animals</strong> come from the earthly branches of your year, month, day and hour. Most people know only their year animal. You have more than one. <a href="/japanese-zodiac-animals/">The twelve animals →</a></p>
+
+          <h2>Why the year begins in February</h2>
+          <p>In this tradition the year does not turn on January 1st. It turns at <strong>Risshun</strong> (立春), the astronomical start of spring, around February 4th — the day after Setsubun, when Japanese households throw beans to drive the demons out.</p>
+          <p>This matters more than it sounds. <strong>If you were born in January or early February, your chart may belong to the previous year.</strong> A reading that ignores this boundary will hand you the wrong pillars entirely. Ours calculates the solar terms astronomically, and — if you tell us where you were born — corrects for apparent solar time. <a href="/four-pillars-of-destiny-japanese-fortune-telling/">How Four Pillars works →</a></p>
+
+          <h2>What this is, and what it isn't</h2>
+          <p>A chart is traditionally read as a map of tendencies, never a verdict. The recurring metaphor in the old texts is <em>weather</em>: you cannot choose the climate you were born into, but knowing it changes how you sail.</p>
+          <p>Take what resonates and leave the rest. Nothing here is medical, legal, or financial advice, and nothing here is a reason to postpone your life.</p>
+        </div>
+
+        <section class="faq reading-about" aria-labelledby="faq-h">
+          <h2 id="faq-h">Frequently asked questions</h2>
+          <div class="faq-item">
+            <h3 class="faq-q">Do I need my exact birth time?</h3>
+            <div class="faq-a"><p>No. Without a time, the hour pillar is omitted — but your Day Master, your five-element balance and three of your four animals are all calculated from the date alone. If you do know your birth time, the reading gains a fourth pillar.</p></div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">What if I was born in January or early February?</h3>
+            <div class="faq-a"><p>Then your chart may belong to the previous year. The traditional year begins at Risshun in early February, not on January 1st, and this reading uses the astronomical boundary rather than the calendar one.</p></div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Is this Chinese BaZi or Japanese Shichū Suimei?</h3>
+            <div class="faq-a"><p>The same underlying system — it travelled from China to Japan over a thousand years ago and developed its own vocabulary and readings there. This site works in the Japanese tradition: Japanese stem and branch names, Japanese readings, and the Japanese folklore attached to each sign.</p></div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Is my birth data sent anywhere?</h3>
+            <div class="faq-a"><p>No. The entire calculation runs in your browser. Nothing about your birth date leaves your device, and we do not store it.</p></div>
+          </div>
+        </section>
       </div>
     </section>
   </main>
