@@ -14,7 +14,8 @@
     "build:og-symbols": "node tools/build-og-symbols.mjs",
     "build:og-zodiac": "node tools/build-og-zodiac.mjs",
     "build": "npm run build:articles && npm run build:og && npm run build:og-symbols && npm run build:hero && npm run build:symbols && npm run build:zodiac",
-    "serve": "python -m http.server 8080"
+    "serve": "python -m http.server 8080",
+    "build:favicon": "node tools/build-favicon.mjs"
   },
   "engines": {
     "node": ">=20"

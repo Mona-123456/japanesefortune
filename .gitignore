@@ -22,3 +22,6 @@ content/10_symbols_*.png
 # Zodiac (Earthly Branch) masters (j01–j13, ~2MB each): archived locally in content/.
 # Inputs to `npm run build:zodiac`; the committed zodiac-* derivatives ship.
 content/j??.png
+
+# Favicon source candidates (Mona): masters in content/, ship generated icons only.
+content/favicon*.png
